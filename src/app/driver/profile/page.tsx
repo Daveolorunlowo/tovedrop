@@ -186,7 +186,7 @@ export default function DriverProfile() {
   };
 
   return (
-    <div className="min-h-screen bg-[#060B19] text-white flex flex-col font-sans overflow-y-auto relative">
+    <div className="min-h-screen bg-[#060B19] text-gray-900 flex flex-col font-sans overflow-y-auto relative">
       
       {/* ── TOAST NOTIFICATION ────────────────────────────── */}
       <AnimatePresence>
@@ -204,12 +204,12 @@ export default function DriverProfile() {
       </AnimatePresence>
 
       {/* ── HEADER ────────────────────────────────────────── */}
-      <div className="sticky top-0 z-50 bg-[#060B19]/80 backdrop-blur-xl border-b border-white/5 px-6 py-5 flex items-center justify-between">
+      <div className="sticky top-0 z-50 bg-[#060B19]/80 backdrop-blur-xl border-b border-gray-100 px-6 py-5 flex items-center justify-between">
         <button 
           onClick={handleBack}
-          className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors border border-white/5"
+          className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors border border-gray-100"
         >
-          {isEditing ? <X className="w-5 h-5 text-white" /> : <ArrowLeft className="w-5 h-5 text-white" />}
+          {isEditing ? <X className="w-5 h-5 text-gray-900" /> : <ArrowLeft className="w-5 h-5 text-gray-900" />}
         </button>
         <h1 className="text-lg font-bold tracking-wide">
           {getTitle()}
@@ -278,7 +278,7 @@ export default function DriverProfile() {
                     value={editForm.name}
                     onChange={(e) => setEditForm({...editForm, name: e.target.value})}
                     placeholder="Full Name"
-                    className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-center text-xl font-bold text-white focus:outline-none focus:border-cyan-500"
+                    className="bg-white/5 border border-gray-200 rounded-lg px-4 py-2 text-center text-xl font-bold text-gray-900 focus:outline-none focus:border-cyan-500"
                   />
                 ) : (
                   <h2 className="text-2xl font-black mb-1 flex items-center gap-2">
@@ -291,7 +291,7 @@ export default function DriverProfile() {
 
                 {/* Stats Row */}
                 {!isEditing && (
-                  <div className="flex items-center gap-6 mt-6 bg-white/5 px-6 py-4 rounded-2xl border border-white/5 w-full justify-center shadow-inner">
+                  <div className="flex items-center gap-6 mt-6 bg-white/5 px-6 py-4 rounded-2xl border border-gray-100 w-full justify-center shadow-inner">
                     <div className="flex flex-col items-center">
                       <span className="text-2xl font-black text-cyan-500">{driver.rating}</span>
                       <div className="flex items-center gap-1 text-[10px] text-slate-400 uppercase tracking-wider font-bold mt-1">
@@ -300,14 +300,14 @@ export default function DriverProfile() {
                     </div>
                     <div className="w-px h-10 bg-white/10" />
                     <div className="flex flex-col items-center">
-                      <span className="text-2xl font-black text-white">{driver.trips}</span>
+                      <span className="text-2xl font-black text-gray-900">{driver.trips}</span>
                       <div className="flex items-center gap-1 text-[10px] text-slate-400 uppercase tracking-wider font-bold mt-1">
                         <MapPin className="w-3 h-3" /> Total Trips
                       </div>
                     </div>
                     <div className="w-px h-10 bg-white/10" />
                     <div className="flex flex-col items-center">
-                      <span className="text-2xl font-black text-white">1.2k</span>
+                      <span className="text-2xl font-black text-gray-900">1.2k</span>
                       <div className="flex items-center gap-1 text-[10px] text-slate-400 uppercase tracking-wider font-bold mt-1">
                         <Clock className="w-3 h-3" /> Hours
                       </div>
@@ -322,7 +322,7 @@ export default function DriverProfile() {
                   <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest">Contact Information</h3>
                 </div>
                 
-                <div className="bg-[#0A1128] rounded-2xl border border-white/5 p-4 shadow-lg space-y-4">
+                <div className="bg-[#0A1128] rounded-2xl border border-gray-100 p-4 shadow-lg space-y-4">
                   {/* Phone */}
                   <div className="flex items-center gap-4">
                     <div className="w-10 h-10 rounded-xl bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20 shrink-0">
@@ -336,13 +336,13 @@ export default function DriverProfile() {
                             type="tel" 
                             value={editForm.phone}
                             onChange={(e) => setEditForm({...editForm, phone: e.target.value})}
-                            className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500"
+                            className="w-full bg-white/5 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:border-cyan-500"
                           />
                         </>
                       ) : (
                         <>
                           <h4 className="text-[10px] text-slate-500 uppercase font-bold tracking-wider mb-0.5">Phone</h4>
-                          <p className="font-bold text-white text-sm">{driver.phone}</p>
+                          <p className="font-bold text-gray-900 text-sm">{driver.phone}</p>
                         </>
                       )}
                     </div>
@@ -363,13 +363,13 @@ export default function DriverProfile() {
                             type="email" 
                             value={editForm.email}
                             onChange={(e) => setEditForm({...editForm, email: e.target.value})}
-                            className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500"
+                            className="w-full bg-white/5 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:border-cyan-500"
                           />
                         </>
                       ) : (
                         <>
                           <h4 className="text-[10px] text-slate-500 uppercase font-bold tracking-wider mb-0.5">Email</h4>
-                          <p className="font-bold text-white text-sm">{driver.email}</p>
+                          <p className="font-bold text-gray-900 text-sm">{driver.email}</p>
                         </>
                       )}
                     </div>
@@ -383,7 +383,7 @@ export default function DriverProfile() {
                   <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest">Vehicle Details</h3>
                 </div>
                 
-                <div className="bg-[#0A1128] rounded-2xl border border-white/5 p-4 flex items-center gap-4 shadow-lg">
+                <div className="bg-[#0A1128] rounded-2xl border border-gray-100 p-4 flex items-center gap-4 shadow-lg">
                   <div className="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20 shrink-0">
                     <Car className="w-6 h-6 text-cyan-500" />
                   </div>
@@ -396,7 +396,7 @@ export default function DriverProfile() {
                           type="text" 
                           value={editForm.car}
                           onChange={(e) => setEditForm({...editForm, car: e.target.value})}
-                          className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500"
+                          className="w-full bg-white/5 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:border-cyan-500"
                         />
                       </div>
                       <div>
@@ -405,13 +405,13 @@ export default function DriverProfile() {
                           type="text" 
                           value={editForm.plate}
                           onChange={(e) => setEditForm({...editForm, plate: e.target.value})}
-                          className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-cyan-500 font-mono uppercase focus:outline-none focus:border-cyan-500"
+                          className="w-full bg-white/5 border border-gray-200 rounded-lg px-3 py-2 text-sm text-cyan-500 font-mono uppercase focus:outline-none focus:border-cyan-500"
                         />
                       </div>
                     </div>
                   ) : (
                     <div className="flex-1">
-                      <h4 className="font-bold text-white text-lg leading-tight">{driver.car}</h4>
+                      <h4 className="font-bold text-gray-900 text-lg leading-tight">{driver.car}</h4>
                       <p className="text-sm text-cyan-500 font-mono mt-1 bg-cyan-500/10 inline-block px-2 py-0.5 rounded uppercase border border-cyan-500/20">{driver.plate}</p>
                     </div>
                   )}
@@ -424,19 +424,19 @@ export default function DriverProfile() {
                   <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3 px-2 mt-8">Account & Settings</h3>
                   
                   <MenuItem 
-                    icon={<CreditCard className="w-5 h-5 text-white" />} 
+                    icon={<CreditCard className="w-5 h-5 text-gray-900" />} 
                     title="Payment Methods" 
                     subtitle="Manage your payout accounts" 
                     onClick={() => setActiveView('PAYMENTS')}
                   />
                   <MenuItem 
-                    icon={<Settings className="w-5 h-5 text-white" />} 
+                    icon={<Settings className="w-5 h-5 text-gray-900" />} 
                     title="App Settings" 
                     subtitle="Navigation, sounds & theme" 
                     onClick={() => setActiveView('SETTINGS')}
                   />
                   <MenuItem 
-                    icon={<HelpCircle className="w-5 h-5 text-white" />} 
+                    icon={<HelpCircle className="w-5 h-5 text-gray-900" />} 
                     title="Help & Support" 
                     subtitle="Contact us or view FAQs" 
                     onClick={() => setActiveView('SUPPORT')}
@@ -445,13 +445,13 @@ export default function DriverProfile() {
                   <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3 px-2 mt-8">My Activity</h3>
 
                   <MenuItem 
-                    icon={<Clock className="w-5 h-5 text-white" />} 
+                    icon={<Clock className="w-5 h-5 text-gray-900" />} 
                     title="Ride History" 
                     subtitle="View your past completed trips" 
                     onClick={() => setActiveView('HISTORY')} 
                   />
                   <MenuItem 
-                    icon={<MapPin className="w-5 h-5 text-white" />} 
+                    icon={<MapPin className="w-5 h-5 text-gray-900" />} 
                     title="Scheduled Rides" 
                     subtitle="View your upcoming accepted rides" 
                     onClick={() => setActiveView('SCHEDULE')} 
@@ -483,29 +483,29 @@ export default function DriverProfile() {
               exit={{ opacity: 0, x: 20 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="bg-[#0A1128] rounded-2xl border border-white/5 p-6 shadow-lg mb-6 text-center">
+              <div className="bg-[#0A1128] rounded-2xl border border-gray-100 p-6 shadow-lg mb-6 text-center">
                 <div className="w-16 h-16 bg-cyan-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-cyan-500/20">
                   <Wallet className="w-8 h-8 text-cyan-500" />
                 </div>
                 <h3 className="text-sm font-medium text-slate-400">Available Balance</h3>
-                <p className="text-4xl font-black text-white mt-1">₦ 45,200</p>
+                <p className="text-4xl font-black text-gray-900 mt-1">₦ 45,200</p>
                 <button 
                   onClick={() => showToast("Withdrawal requested successfully!")}
-                  className="mt-6 w-full py-3 bg-cyan-500 text-[#060B19] rounded-xl font-bold shadow-[0_0_15px_rgba(0,201,232,0.3)] hover:bg-cyan-400 transition-colors"
+                  className="mt-6 w-full py-3 bg-cyan-500 text-[#060B19] rounded-xl font-bold shadow-sm hover:bg-cyan-400 transition-colors"
                 >
                   Withdraw Funds
                 </button>
               </div>
 
               <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3 px-2">Payout Methods</h3>
-              <div className="bg-[#0A1128] rounded-2xl border border-white/5 overflow-hidden shadow-lg mb-4">
-                <div className="p-4 flex items-center justify-between border-b border-white/5 bg-white/5">
+              <div className="bg-[#0A1128] rounded-2xl border border-gray-100 overflow-hidden shadow-lg mb-4">
+                <div className="p-4 flex items-center justify-between border-b border-gray-100 bg-white/5">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
-                      <CreditCard className="w-5 h-5 text-white" />
+                      <CreditCard className="w-5 h-5 text-gray-900" />
                     </div>
                     <div>
-                      <p className="font-bold text-white text-sm">GTBank •••• 4512</p>
+                      <p className="font-bold text-gray-900 text-sm">GTBank •••• 4512</p>
                       <p className="text-xs text-slate-400">Default Payout Account</p>
                     </div>
                   </div>
@@ -534,7 +534,7 @@ export default function DriverProfile() {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3 px-2">Preferences</h3>
-                  <div className="bg-[#0A1128] rounded-2xl border border-white/5 shadow-lg overflow-hidden">
+                  <div className="bg-[#0A1128] rounded-2xl border border-gray-100 shadow-lg overflow-hidden">
                     <ToggleItem icon={<Moon className="w-5 h-5" />} title="Dark Mode" description="Use dark theme" defaultChecked={true} />
                     <div className="h-px bg-white/5 mx-4" />
                     <ToggleItem icon={<Volume2 className="w-5 h-5" />} title="Voice Navigation" description="Read directions aloud" defaultChecked={true} />
@@ -545,7 +545,7 @@ export default function DriverProfile() {
 
                 <div>
                   <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3 px-2">Driver Preferences</h3>
-                  <div className="bg-[#0A1128] rounded-2xl border border-white/5 shadow-lg overflow-hidden">
+                  <div className="bg-[#0A1128] rounded-2xl border border-gray-100 shadow-lg overflow-hidden">
                     <ToggleItem icon={<Car className="w-5 h-5" />} title="Auto-Accept Rides" description="Automatically accept requests" defaultChecked={false} />
                   </div>
                 </div>
@@ -564,28 +564,28 @@ export default function DriverProfile() {
             >
               <div className="bg-gradient-to-br from-cyan-500/20 to-transparent border border-cyan-500/20 rounded-2xl p-6 shadow-lg mb-6 text-center">
                 <HelpCircle className="w-10 h-10 text-cyan-500 mx-auto mb-3" />
-                <h3 className="text-xl font-black text-white mb-2">How can we help?</h3>
+                <h3 className="text-xl font-black text-gray-900 mb-2">How can we help?</h3>
                 <p className="text-sm text-slate-400 mb-6">Our support team is available 24/7 to assist you with any issues.</p>
                 <div className="grid grid-cols-2 gap-3">
                   <button 
                     onClick={() => showToast("Opening Live Chat...")}
-                    className="flex flex-col items-center gap-2 bg-white/10 hover:bg-white/20 p-4 rounded-xl transition-colors border border-white/5"
+                    className="flex flex-col items-center gap-2 bg-white/10 hover:bg-white/20 p-4 rounded-xl transition-colors border border-gray-100"
                   >
-                    <MessageSquare className="w-6 h-6 text-white" />
-                    <span className="text-xs font-bold text-white">Live Chat</span>
+                    <MessageSquare className="w-6 h-6 text-gray-900" />
+                    <span className="text-xs font-bold text-gray-900">Live Chat</span>
                   </button>
                   <button 
                     onClick={() => showToast("Calling Support...")}
-                    className="flex flex-col items-center gap-2 bg-white/10 hover:bg-white/20 p-4 rounded-xl transition-colors border border-white/5"
+                    className="flex flex-col items-center gap-2 bg-white/10 hover:bg-white/20 p-4 rounded-xl transition-colors border border-gray-100"
                   >
-                    <Phone className="w-6 h-6 text-white" />
-                    <span className="text-xs font-bold text-white">Call Us</span>
+                    <Phone className="w-6 h-6 text-gray-900" />
+                    <span className="text-xs font-bold text-gray-900">Call Us</span>
                   </button>
                 </div>
               </div>
 
               <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3 px-2">Frequently Asked Questions</h3>
-              <div className="bg-[#0A1128] rounded-2xl border border-white/5 shadow-lg overflow-hidden">
+              <div className="bg-[#0A1128] rounded-2xl border border-gray-100 shadow-lg overflow-hidden">
                 <FaqItem question="How are payouts processed?" />
                 <div className="h-px bg-white/5 mx-4" />
                 <FaqItem question="What if a rider cancels?" />
@@ -613,7 +613,7 @@ export default function DriverProfile() {
               ) : (
                 <div className="flex flex-col gap-4">
                   {historyRides.map(ride => (
-                    <div key={ride.id} className="bg-[#0A1128] p-5 rounded-2xl shadow-sm border border-white/5 flex flex-col gap-3">
+                    <div key={ride.id} className="bg-[#0A1128] p-5 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
                       <div className="flex justify-between items-center">
                         <span className="text-xs font-black text-slate-400 uppercase tracking-widest">
                           {new Date(ride.timestamp).toLocaleDateString()}
@@ -626,7 +626,7 @@ export default function DriverProfile() {
                       </div>
                       <div className="flex items-center gap-3 mt-2">
                         <div className="flex-1">
-                          <p className="text-white font-bold">{ride.dropoff}</p>
+                          <p className="text-gray-900 font-bold">{ride.dropoff}</p>
                           <p className="text-xs text-slate-500 font-medium">From: {ride.pickup}</p>
                         </div>
                       </div>
@@ -655,7 +655,7 @@ export default function DriverProfile() {
               ) : (
                 <div className="flex flex-col gap-4">
                   {scheduledRides.map(ride => (
-                    <div key={ride.id} className="bg-[#0A1128] p-5 rounded-2xl shadow-sm border border-white/5 flex flex-col gap-3 relative overflow-hidden">
+                    <div key={ride.id} className="bg-[#0A1128] p-5 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3 relative overflow-hidden">
                       <div className="absolute top-0 left-0 w-1 h-full bg-cyan-500" />
                       <div className="flex justify-between items-center">
                         <span className="text-xs font-black text-cyan-500 uppercase tracking-widest">
@@ -666,8 +666,8 @@ export default function DriverProfile() {
                         </span>
                       </div>
                       <div className="flex flex-col gap-1 mt-2">
-                        <p className="text-white font-bold flex items-center gap-2"><MapPin className="w-4 h-4 text-emerald-500"/> {ride.pickup}</p>
-                        <p className="text-white font-bold flex items-center gap-2"><MapPin className="w-4 h-4 text-orange-500"/> {ride.dropoff}</p>
+                        <p className="text-gray-900 font-bold flex items-center gap-2"><MapPin className="w-4 h-4 text-emerald-500"/> {ride.pickup}</p>
+                        <p className="text-gray-900 font-bold flex items-center gap-2"><MapPin className="w-4 h-4 text-orange-500"/> {ride.dropoff}</p>
                       </div>
                     </div>
                   ))}
@@ -688,13 +688,13 @@ function MenuItem({ icon, title, subtitle, onClick }: { icon: React.ReactNode, t
   return (
     <button 
       onClick={onClick}
-      className="w-full flex items-center gap-4 bg-[#0A1128] hover:bg-[#0A1128]/80 p-4 rounded-2xl border border-white/5 shadow-lg transition-colors group text-left"
+      className="w-full flex items-center gap-4 bg-[#0A1128] hover:bg-[#0A1128]/80 p-4 rounded-2xl border border-gray-100 shadow-lg transition-colors group text-left"
     >
       <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
         {icon}
       </div>
       <div className="flex-1">
-        <h4 className="font-bold text-white">{title}</h4>
+        <h4 className="font-bold text-gray-900">{title}</h4>
         {subtitle && <p className="text-xs text-slate-400 mt-0.5">{subtitle}</p>}
       </div>
       <ChevronRight className="w-5 h-5 text-slate-500 group-hover:text-cyan-500 transition-colors" />
@@ -711,7 +711,7 @@ function ToggleItem({ icon, title, description, defaultChecked }: { icon: React.
           {icon}
         </div>
         <div>
-          <h4 className="font-bold text-white text-sm">{title}</h4>
+          <h4 className="font-bold text-gray-900 text-sm">{title}</h4>
           <p className="text-xs text-slate-400">{description}</p>
         </div>
       </div>
@@ -731,8 +731,9 @@ function ToggleItem({ icon, title, description, defaultChecked }: { icon: React.
 function FaqItem({ question }: { question: string }) {
   return (
     <button className="w-full p-4 flex items-center justify-between hover:bg-white/5 transition-colors text-left group">
-      <span className="text-sm font-bold text-slate-300 group-hover:text-white transition-colors">{question}</span>
+      <span className="text-sm font-bold text-slate-300 group-hover:text-gray-900 transition-colors">{question}</span>
       <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-cyan-500 transition-colors" />
     </button>
   );
 }
+
