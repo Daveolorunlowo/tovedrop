@@ -32,7 +32,7 @@ function getFriendlyError(code: string): string {
     case 'auth/operation-not-allowed':
       return 'This sign-in method isn\'t enabled. Contact support.';
     default:
-      return 'Something went wrong. Please try again.';
+      return `Something went wrong (${code}). Please try again later.`;
   }
 }
 

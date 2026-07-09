@@ -834,6 +834,8 @@ export default function PassengerDashboard() {
           </motion.div>
         </AnimatePresence>
         
+        {renderBottomNav()}
+        
         {/* Top-Up Modal overlay */}
         <AnimatePresence>
           {showTopUp && (

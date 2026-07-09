@@ -73,10 +73,10 @@ export default function Navbar() {
             exit={{ opacity: 0, y: -10 }}
             className="md:hidden absolute top-full left-0 w-full bg-[#030712]/95 backdrop-blur-xl border-b border-white/10 px-6 py-8 flex flex-col gap-6"
           >
-            <button onClick={() => router.push('/login?role=passenger')} className="text-left font-semibold text-lg text-white">Ride</button>
-            <button onClick={() => router.push('/login?role=driver')} className="text-left font-semibold text-lg text-white">Drive</button>
+            <button onClick={() => { router.push('/login?role=passenger'); setMenuOpen(false); }} className="text-left font-semibold text-lg text-white">Ride</button>
+            <button onClick={() => { router.push('/login?role=driver'); setMenuOpen(false); }} className="text-left font-semibold text-lg text-white">Drive</button>
             <div className="h-px w-full bg-white/10 my-2" />
-            <button onClick={() => router.push('/login?role=passenger')} className="bg-[#00C9E8] text-[#030712] font-bold py-3.5 rounded-xl text-center w-full">Sign In</button>
+            <button onClick={() => { router.push('/login?role=passenger'); setMenuOpen(false); }} className="bg-[#00C9E8] text-[#030712] font-bold py-3.5 rounded-xl text-center w-full">Sign In</button>
           </motion.div>
         )}
       </AnimatePresence>
