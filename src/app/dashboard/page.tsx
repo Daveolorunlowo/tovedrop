@@ -57,6 +57,16 @@ export default function PassengerDashboard() {
     }
   }, [currentView, userId]);
 
+  // Profile State
+  const [profileName, setProfileName] = useState('Alex B.');
+  const [profileEmail, setProfileEmail] = useState('alex.b@bowen.edu.ng');
+  const [profilePhone, setProfilePhone] = useState('+234 800 000 0000');
+  const [profileDept, setProfileDept] = useState('Computer Science');
+  const [profileMatric, setProfileMatric] = useState('BU25MCT1045');
+  const [profilePic, setProfilePic] = useState('https://i.pravatar.cc/150?img=11');
+  const [isEditingProfile, setIsEditingProfile] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   // Paystack Integration
   const paystackConfig = {
     reference: (new Date()).getTime().toString(),
@@ -81,16 +91,6 @@ export default function PassengerDashboard() {
   const handlePaystackClose = () => {
     console.log('Payment modal closed');
   };
-
-  // Profile State
-  const [profileName, setProfileName] = useState('Alex B.');
-  const [profileEmail, setProfileEmail] = useState('alex.b@bowen.edu.ng');
-  const [profilePhone, setProfilePhone] = useState('+234 800 000 0000');
-  const [profileDept, setProfileDept] = useState('Computer Science');
-  const [profileMatric, setProfileMatric] = useState('BU25MCT1045');
-  const [profilePic, setProfilePic] = useState('https://i.pravatar.cc/150?img=11');
-  const [isEditingProfile, setIsEditingProfile] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
