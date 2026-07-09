@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bowen Rides - Live Tracking</title>
+    <!-- React & ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            overflow: hidden; 
+            overscroll-behavior-y: none;
+        }
+        .font-heading { font-family: 'Outfit', sans-serif; }
+        
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        }
+        
+        /* Map background simulation matching the template */
+        .map-bg {
+            background: linear-gradient(180deg, #e4e6f2 0%, #d8daea 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    
+    <div id="root" class="w-full"></div>
+
+    <script type="text/babel">
+        const Tracking = () => {
+            return (
+                <div className="h-[100dvh] w-full flex flex-col relative max-w-md mx-auto bg-white overflow-hidden shadow-2xl">
+                    
+                    {/* Top 70%: Map Area */}
+                    <div className="relative flex-grow map-bg flex flex-col items-center justify-center">
+                        
+                        {/* Header Nav */}
+                        <div className="absolute top-0 w-full px-5 pt-8 flex justify-between items-center z-10">
+                            <button className="text-[#0f172a] p-2 -ml-2 rounded-full transition-colors active:scale-95">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                                </svg>
+                            </button>
+                            <h2 className="font-heading text-2xl font-bold text-[#0f172a]">Bowen Rides</h2>
+                            <button className="text-[#0f172a] p-2 -mr-2 rounded-full transition-colors active:scale-95">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        {/* Campus Secure Badge */}
+                        <div className="absolute top-24 right-5 bg-white rounded-xl px-3 py-2.5 shadow-sm flex items-center gap-2 z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-green-700">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span className="text-xs font-semibold text-[#0f172a]">Campus Secure</span>
+                        </div>
+
+                        {/* Animated Driver Marker */}
+                        <div className="relative flex flex-col items-center mt-10">
+                            {/* Text Badge */}
+                            <div className="bg-[#0f172a] text-white px-3 py-1.5 rounded-md text-[9px] font-bold tracking-widest mb-1.5 relative shadow-lg z-20">
+                                JOHN ARRIVING
+                                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-[#0f172a] rotate-45"></div>
+                            </div>
+                            
+                            {/* Graphic Marker from template */}
+                            <div className="w-16 h-16 bg-indigo-500 rounded-xl flex items-center justify-center shadow-xl mb-4 relative border-2 border-indigo-400 z-10">
+                                <div className="w-12 h-12 bg-white rounded-lg flex items-end justify-center overflow-hidden relative">
+                                    <div className="w-5 h-5 bg-[#0f172a] rounded-full absolute top-2"></div>
+                                    <div className="w-10 h-5 bg-[#0f172a] absolute bottom-0 rounded-t-[20px]"></div>
+                                </div>
+                            </div>
+
+                            {/* Pulsing Blue Dot */}
+                            <div className="absolute top-[96px] z-0">
+                                <div className="w-4 h-4 bg-blue-500 rounded-full pulse-dot border-[3px] border-white shadow-md"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Bottom 30%: Status Card */}
+                    <div className="relative w-full bg-white rounded-t-3xl shadow-[0_-15px_40px_rgba(0,0,0,0.08)] z-20 flex flex-col px-6 pt-3 pb-8 h-[35vh] min-h-[280px]">
+                        
+                        {/* Drag Handle */}
+                        <div className="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6"></div>
+                        
+                        {/* Header */}
+                        <h2 className="font-heading text-[28px] leading-tight font-bold text-[#0f172a] mb-6 tracking-tight">Driver arriving in 3 mins</h2>
+
+                        {/* Driver Profile Flex Row */}
+                        <div className="flex items-center gap-4 mb-6">
+                            {/* Avatar */}
+                            <div className="relative flex-shrink-0">
+                                <img src="https://i.pravatar.cc/150?img=11" alt="John D." className="w-14 h-14 rounded-full object-cover border border-slate-200 shadow-sm" />
+                                <div className="absolute -bottom-1 -right-1 bg-[#cfa835] rounded-full p-0.5 border-2 border-white shadow-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5 text-white">
+                                        <path fillRule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            {/* Details */}
+                            <div className="flex-grow">
+                                <div className="flex items-center gap-2 mb-1">
+                                    <h3 className="font-bold text-lg text-[#0f172a]">John D.</h3>
+                                    <div className="flex items-center gap-1 bg-slate-100 px-2.5 py-0.5 rounded-full text-xs font-semibold text-[#0f172a]">
+                                        <span className="text-[#cfa835]">★</span> 4.9
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-2 text-sm text-slate-600 font-medium">
+                                    <span>Toyota Corolla &bull; Silver</span>
+                                    <span className="bg-slate-200 border border-slate-300 px-2 py-[2px] rounded text-[10px] font-bold text-[#0f172a] tracking-wider">BWN-123</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Spacer to push buttons to bottom */}
+                        <div className="flex-grow"></div>
+
+                        {/* Actions */}
+                        <div className="flex items-center gap-3 mt-auto">
+                            <button className="flex-grow bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl shadow-md transition-all active:scale-[0.98] flex justify-center items-center gap-2 text-[15px]">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                                    <path fillRule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z" clipRule="evenodd" />
+                                </svg>
+                                Call Driver
+                            </button>
+                            <button className="px-6 py-4 text-red-500 hover:bg-red-50 font-semibold rounded-xl transition-colors active:scale-[0.98] text-[15px]">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<Tracking />);
+    </script>
+</body>
+</html>

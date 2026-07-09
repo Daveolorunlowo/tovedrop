@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bowen Rides - Move Around Campus</title>
+    <meta name="description" content="Exclusive ride-hailing app for Bowen University students and staff.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                <div class="logo-box">
+                    <div class="logo-dash"></div>
+                </div>
+                Bowen Rides
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+
+            <div class="nav-links">
+                <a href="#ride" class="nav-link active">Ride</a>
+                <a href="#drive" class="nav-link">Drive</a>
+                <a href="#signin" class="btn-navy sign-in-btn">Sign In</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1 class="fade-up">Move Around<br>Campus, Safely and<br>Instantly.</h1>
+                <p class="fade-up delay-1">Exclusively for <strong>verified</strong> Bowen University students and staff. Secure transit built for the academic community.</p>
+                <div class="hero-cta fade-up delay-2">
+                    <a href="#book" class="btn-gold">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+                        Book a Ride
+                    </a>
+                    <a href="#driver" class="btn-navy">Become a Driver</a>
+                </div>
+            </div>
+            <div class="hero-image fade-up delay-1">
+                <img src="app_mockup.png" alt="Bowen Rides App Map UI" class="mockup-img">
+            </div>
+        </div>
+    </header>
+
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title fade-up">Reliable. Secure. Campus-Focused.</h2>
+            <div class="features-grid">
+                
+                <!-- Feature 1 -->
+                <div class="feature-card fade-up">
+                    <div class="icon-circle">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
+                    <h3>Campus Exclusive</h3>
+                    <p>Restricted to @bowen.edu.ng emails for your safety. We verify every passenger and driver against the university database.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card fade-up delay-1">
+                    <div class="icon-circle">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+                    </div>
+                    <h3>Fixed Transparent Fares</h3>
+                    <p>No surge pricing. Flat rates of ₦75 for cabs and ₦60 for shuttles. Budget-friendly transit for every student.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card fade-up delay-2">
+                    <div class="icon-circle">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Drivers are always within the campus gates. Get picked up in minutes, no matter where you are on campus.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="cta-footer">
+        <div class="container cta-content fade-up">
+            <h2>Ready to simplify your campus commute?</h2>
+            <p>Join thousands of students and staff who rely on Bowen Rides for their daily transit needs within the university grounds.</p>
+            <a href="#getstarted" class="btn-gold btn-large">Get Started</a>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <h3 class="footer-logo">Bowen Rides</h3>
+                <div class="links-row">
+                    <a href="#">Safety</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Help Center</a>
+                </div>
+                <p class="copyright">&copy; 2024 Bowen Rides. The Reliable Guardian of Campus Transit.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
