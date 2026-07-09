@@ -204,10 +204,10 @@ export default function DriverProfile() {
       </AnimatePresence>
 
       {/* ── HEADER ────────────────────────────────────────── */}
-      <div className="sticky top-0 z-50 bg-[#060B19]/80 backdrop-blur-xl border-b border-gray-100 px-6 py-5 flex items-center justify-between">
+      <div className="sticky top-0 z-50 bg-[#060B19]/80 backdrop-blur-xl border-b border-slate-100 px-6 py-5 flex items-center justify-between">
         <button 
           onClick={handleBack}
-          className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors border border-gray-100"
+          className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors border border-slate-100"
         >
           {isEditing ? <X className="w-5 h-5 text-gray-900" /> : <ArrowLeft className="w-5 h-5 text-gray-900" />}
         </button>
@@ -278,7 +278,7 @@ export default function DriverProfile() {
                     value={editForm.name}
                     onChange={(e) => setEditForm({...editForm, name: e.target.value})}
                     placeholder="Full Name"
-                    className="bg-white/5 border border-gray-200 rounded-lg px-4 py-2 text-center text-xl font-bold text-gray-900 focus:outline-none focus:border-cyan-500"
+                    className="bg-white/5 border border-slate-100 rounded-lg px-4 py-2 text-center text-xl font-bold text-gray-900 focus:outline-none focus:border-cyan-500"
                   />
                 ) : (
                   <h2 className="text-2xl font-black mb-1 flex items-center gap-2">
@@ -291,7 +291,7 @@ export default function DriverProfile() {
 
                 {/* Stats Row */}
                 {!isEditing && (
-                  <div className="flex items-center gap-6 mt-6 bg-white/5 px-6 py-4 rounded-2xl border border-gray-100 w-full justify-center shadow-inner">
+                  <div className="flex items-center gap-6 mt-6 bg-white/5 px-6 py-4 rounded-3xl border border-slate-100 w-full justify-center shadow-inner">
                     <div className="flex flex-col items-center">
                       <span className="text-2xl font-black text-cyan-500">{driver.rating}</span>
                       <div className="flex items-center gap-1 text-[10px] text-slate-400 uppercase tracking-wider font-bold mt-1">
@@ -322,10 +322,10 @@ export default function DriverProfile() {
                   <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest">Contact Information</h3>
                 </div>
                 
-                <div className="bg-[#0A1128] rounded-2xl border border-gray-100 p-4 shadow-lg space-y-4">
+                <div className="bg-[#0A1128] rounded-3xl border border-slate-100 p-5 shadow-lg space-y-4">
                   {/* Phone */}
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20 shrink-0">
+                  <div className="flex items-center gap-5">
+                    <div className="w-10 h-10 rounded-3xl bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20 shrink-0">
                       <Phone className="w-5 h-5 text-cyan-500" />
                     </div>
                     <div className="flex-1">
@@ -336,7 +336,7 @@ export default function DriverProfile() {
                             type="tel" 
                             value={editForm.phone}
                             onChange={(e) => setEditForm({...editForm, phone: e.target.value})}
-                            className="w-full bg-white/5 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:border-cyan-500"
+                            className="w-full bg-white/5 border border-slate-100 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:border-cyan-500"
                           />
                         </>
                       ) : (
@@ -351,8 +351,8 @@ export default function DriverProfile() {
                   <div className="h-px bg-white/5 w-full" />
 
                   {/* Email */}
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20 shrink-0">
+                  <div className="flex items-center gap-5">
+                    <div className="w-10 h-10 rounded-3xl bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20 shrink-0">
                       <Mail className="w-5 h-5 text-cyan-500" />
                     </div>
                     <div className="flex-1">
@@ -363,7 +363,7 @@ export default function DriverProfile() {
                             type="email" 
                             value={editForm.email}
                             onChange={(e) => setEditForm({...editForm, email: e.target.value})}
-                            className="w-full bg-white/5 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:border-cyan-500"
+                            className="w-full bg-white/5 border border-slate-100 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:border-cyan-500"
                           />
                         </>
                       ) : (
@@ -383,8 +383,8 @@ export default function DriverProfile() {
                   <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest">Vehicle Details</h3>
                 </div>
                 
-                <div className="bg-[#0A1128] rounded-2xl border border-gray-100 p-4 flex items-center gap-4 shadow-lg">
-                  <div className="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20 shrink-0">
+                <div className="bg-[#0A1128] rounded-3xl border border-slate-100 p-5 flex items-center gap-5 shadow-lg">
+                  <div className="w-12 h-12 rounded-3xl bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20 shrink-0">
                     <Car className="w-6 h-6 text-cyan-500" />
                   </div>
                   
@@ -396,7 +396,7 @@ export default function DriverProfile() {
                           type="text" 
                           value={editForm.car}
                           onChange={(e) => setEditForm({...editForm, car: e.target.value})}
-                          className="w-full bg-white/5 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:border-cyan-500"
+                          className="w-full bg-white/5 border border-slate-100 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:border-cyan-500"
                         />
                       </div>
                       <div>
@@ -405,7 +405,7 @@ export default function DriverProfile() {
                           type="text" 
                           value={editForm.plate}
                           onChange={(e) => setEditForm({...editForm, plate: e.target.value})}
-                          className="w-full bg-white/5 border border-gray-200 rounded-lg px-3 py-2 text-sm text-cyan-500 font-mono uppercase focus:outline-none focus:border-cyan-500"
+                          className="w-full bg-white/5 border border-slate-100 rounded-lg px-3 py-2 text-sm text-cyan-500 font-mono uppercase focus:outline-none focus:border-cyan-500"
                         />
                       </div>
                     </div>
@@ -465,7 +465,7 @@ export default function DriverProfile() {
                   onClick={async () => {
                     await signOut(auth);
                   }}
-                  className="w-full flex items-center justify-center gap-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 font-bold py-4 rounded-xl transition-colors border border-red-500/20 mt-4 shadow-lg"
+                  className="w-full flex items-center justify-center gap-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 font-bold py-4 rounded-3xl transition-colors border border-red-500/20 mt-4 shadow-lg"
                 >
                   <LogOut className="w-5 h-5" />
                   Sign Out
@@ -483,7 +483,7 @@ export default function DriverProfile() {
               exit={{ opacity: 0, x: 20 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="bg-[#0A1128] rounded-2xl border border-gray-100 p-6 shadow-lg mb-6 text-center">
+              <div className="bg-[#0A1128] rounded-3xl border border-slate-100 p-6 shadow-lg mb-6 text-center">
                 <div className="w-16 h-16 bg-cyan-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-cyan-500/20">
                   <Wallet className="w-8 h-8 text-cyan-500" />
                 </div>
@@ -491,15 +491,15 @@ export default function DriverProfile() {
                 <p className="text-4xl font-black text-gray-900 mt-1">₦ 45,200</p>
                 <button 
                   onClick={() => showToast("Withdrawal requested successfully!")}
-                  className="mt-6 w-full py-3 bg-cyan-500 text-[#060B19] rounded-xl font-bold shadow-sm hover:bg-cyan-400 transition-colors"
+                  className="mt-6 w-full py-3 bg-cyan-500 text-[#060B19] rounded-3xl font-bold shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:bg-cyan-400 transition-colors"
                 >
                   Withdraw Funds
                 </button>
               </div>
 
               <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3 px-2">Payout Methods</h3>
-              <div className="bg-[#0A1128] rounded-2xl border border-gray-100 overflow-hidden shadow-lg mb-4">
-                <div className="p-4 flex items-center justify-between border-b border-gray-100 bg-white/5">
+              <div className="bg-[#0A1128] rounded-3xl border border-slate-100 overflow-hidden shadow-lg mb-4">
+                <div className="p-5 flex items-center justify-between border-b border-slate-100 bg-white/5">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
                       <CreditCard className="w-5 h-5 text-gray-900" />
@@ -513,7 +513,7 @@ export default function DriverProfile() {
                 </div>
                 <button 
                   onClick={() => showToast("Add bank account modal")}
-                  className="w-full p-4 flex items-center gap-3 hover:bg-white/5 transition-colors text-cyan-500 font-bold text-sm"
+                  className="w-full p-5 flex items-center gap-3 hover:bg-white/5 transition-colors text-cyan-500 font-bold text-sm"
                 >
                   <Plus className="w-5 h-5" />
                   Add New Bank Account
@@ -534,7 +534,7 @@ export default function DriverProfile() {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3 px-2">Preferences</h3>
-                  <div className="bg-[#0A1128] rounded-2xl border border-gray-100 shadow-lg overflow-hidden">
+                  <div className="bg-[#0A1128] rounded-3xl border border-slate-100 shadow-lg overflow-hidden">
                     <ToggleItem icon={<Moon className="w-5 h-5" />} title="Dark Mode" description="Use dark theme" defaultChecked={true} />
                     <div className="h-px bg-white/5 mx-4" />
                     <ToggleItem icon={<Volume2 className="w-5 h-5" />} title="Voice Navigation" description="Read directions aloud" defaultChecked={true} />
@@ -545,7 +545,7 @@ export default function DriverProfile() {
 
                 <div>
                   <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3 px-2">Driver Preferences</h3>
-                  <div className="bg-[#0A1128] rounded-2xl border border-gray-100 shadow-lg overflow-hidden">
+                  <div className="bg-[#0A1128] rounded-3xl border border-slate-100 shadow-lg overflow-hidden">
                     <ToggleItem icon={<Car className="w-5 h-5" />} title="Auto-Accept Rides" description="Automatically accept requests" defaultChecked={false} />
                   </div>
                 </div>
@@ -562,21 +562,21 @@ export default function DriverProfile() {
               exit={{ opacity: 0, x: 20 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="bg-gradient-to-br from-cyan-500/20 to-transparent border border-cyan-500/20 rounded-2xl p-6 shadow-lg mb-6 text-center">
+              <div className="bg-gradient-to-br from-cyan-500/20 to-transparent border border-cyan-500/20 rounded-3xl p-6 shadow-lg mb-6 text-center">
                 <HelpCircle className="w-10 h-10 text-cyan-500 mx-auto mb-3" />
                 <h3 className="text-xl font-black text-gray-900 mb-2">How can we help?</h3>
                 <p className="text-sm text-slate-400 mb-6">Our support team is available 24/7 to assist you with any issues.</p>
                 <div className="grid grid-cols-2 gap-3">
                   <button 
                     onClick={() => showToast("Opening Live Chat...")}
-                    className="flex flex-col items-center gap-2 bg-white/10 hover:bg-white/20 p-4 rounded-xl transition-colors border border-gray-100"
+                    className="flex flex-col items-center gap-2 bg-white/10 hover:bg-white/20 p-5 rounded-3xl transition-colors border border-slate-100"
                   >
                     <MessageSquare className="w-6 h-6 text-gray-900" />
                     <span className="text-xs font-bold text-gray-900">Live Chat</span>
                   </button>
                   <button 
                     onClick={() => showToast("Calling Support...")}
-                    className="flex flex-col items-center gap-2 bg-white/10 hover:bg-white/20 p-4 rounded-xl transition-colors border border-gray-100"
+                    className="flex flex-col items-center gap-2 bg-white/10 hover:bg-white/20 p-5 rounded-3xl transition-colors border border-slate-100"
                   >
                     <Phone className="w-6 h-6 text-gray-900" />
                     <span className="text-xs font-bold text-gray-900">Call Us</span>
@@ -585,7 +585,7 @@ export default function DriverProfile() {
               </div>
 
               <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3 px-2">Frequently Asked Questions</h3>
-              <div className="bg-[#0A1128] rounded-2xl border border-gray-100 shadow-lg overflow-hidden">
+              <div className="bg-[#0A1128] rounded-3xl border border-slate-100 shadow-lg overflow-hidden">
                 <FaqItem question="How are payouts processed?" />
                 <div className="h-px bg-white/5 mx-4" />
                 <FaqItem question="What if a rider cancels?" />
@@ -611,9 +611,9 @@ export default function DriverProfile() {
                   <p className="text-slate-500 font-medium">You have no past trips.</p>
                 </div>
               ) : (
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-5">
                   {historyRides.map(ride => (
-                    <div key={ride.id} className="bg-[#0A1128] p-5 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+                    <div key={ride.id} className="bg-[#0A1128] p-5 rounded-3xl shadow-[0_2px_12px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col gap-3">
                       <div className="flex justify-between items-center">
                         <span className="text-xs font-black text-slate-400 uppercase tracking-widest">
                           {new Date(ride.timestamp).toLocaleDateString()}
@@ -653,9 +653,9 @@ export default function DriverProfile() {
                   <p className="text-slate-500 font-medium">No upcoming scheduled rides.</p>
                 </div>
               ) : (
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-5">
                   {scheduledRides.map(ride => (
-                    <div key={ride.id} className="bg-[#0A1128] p-5 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3 relative overflow-hidden">
+                    <div key={ride.id} className="bg-[#0A1128] p-5 rounded-3xl shadow-[0_2px_12px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col gap-3 relative overflow-hidden">
                       <div className="absolute top-0 left-0 w-1 h-full bg-cyan-500" />
                       <div className="flex justify-between items-center">
                         <span className="text-xs font-black text-cyan-500 uppercase tracking-widest">
@@ -688,7 +688,7 @@ function MenuItem({ icon, title, subtitle, onClick }: { icon: React.ReactNode, t
   return (
     <button 
       onClick={onClick}
-      className="w-full flex items-center gap-4 bg-[#0A1128] hover:bg-[#0A1128]/80 p-4 rounded-2xl border border-gray-100 shadow-lg transition-colors group text-left"
+      className="w-full flex items-center gap-5 bg-[#0A1128] hover:bg-[#0A1128]/80 p-5 rounded-3xl border border-slate-100 shadow-lg transition-colors group text-left"
     >
       <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
         {icon}
@@ -705,7 +705,7 @@ function MenuItem({ icon, title, subtitle, onClick }: { icon: React.ReactNode, t
 function ToggleItem({ icon, title, description, defaultChecked }: { icon: React.ReactNode, title: string, description: string, defaultChecked: boolean }) {
   const [checked, setChecked] = useState(defaultChecked);
   return (
-    <div className="p-4 flex items-center justify-between bg-white/5 hover:bg-white/10 transition-colors">
+    <div className="p-5 flex items-center justify-between bg-white/5 hover:bg-white/10 transition-colors">
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-slate-300">
           {icon}
@@ -721,7 +721,7 @@ function ToggleItem({ icon, title, description, defaultChecked }: { icon: React.
       >
         <motion.div 
           animate={{ x: checked ? 24 : 0 }}
-          className="w-4 h-4 bg-white rounded-full shadow-sm"
+          className="w-4 h-4 bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.03)]"
         />
       </button>
     </div>
@@ -730,10 +730,11 @@ function ToggleItem({ icon, title, description, defaultChecked }: { icon: React.
 
 function FaqItem({ question }: { question: string }) {
   return (
-    <button className="w-full p-4 flex items-center justify-between hover:bg-white/5 transition-colors text-left group">
+    <button className="w-full p-5 flex items-center justify-between hover:bg-white/5 transition-colors text-left group">
       <span className="text-sm font-bold text-slate-300 group-hover:text-gray-900 transition-colors">{question}</span>
       <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-cyan-500 transition-colors" />
     </button>
   );
 }
+
 

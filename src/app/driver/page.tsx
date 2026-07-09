@@ -243,7 +243,7 @@ export default function DriverDashboard() {
   // HOME VIEW
   // -------------------------------------------------------------
   const renderHome = () => (
-    <div className="relative w-full h-screen bg-gray-50 flex flex-col overflow-hidden">
+    <div className="relative w-full h-screen bg-slate-50 flex flex-col overflow-hidden">
       {/* Real-time Map Background */}
       <div className="absolute inset-0 z-0 opacity-80">
         <LiveMap />
@@ -251,7 +251,7 @@ export default function DriverDashboard() {
       </div>
 
       {/* Header - Glassmorphism */}
-      <div className="absolute top-0 w-full z-10 bg-white border border-gray-100 shadow-sm px-4 py-4 flex items-center justify-between border-b border-gray-100">
+      <div className="absolute top-0 w-full z-10 bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] px-4 py-4 flex items-center justify-between border-b border-slate-100">
         <div className="flex items-center gap-3">
           <button className="p-2 rounded-full hover:bg-white/10 transition-colors">
             <Menu className="w-6 h-6 text-gray-900" />
@@ -263,7 +263,7 @@ export default function DriverDashboard() {
         <button 
           onClick={handleGoOnline}
           className={`flex items-center gap-2 px-3 py-1.5 rounded-full transition-all border ${
-            isOnline ? 'bg-green-500/10 border-green-500/30' : 'bg-white/5 border-gray-200'
+            isOnline ? 'bg-green-500/10 border-green-500/30' : 'bg-white/5 border-slate-100'
           }`}
         >
           <span className={`text-[10px] font-black tracking-widest uppercase ${isOnline ? 'text-green-400' : 'text-slate-400'}`}>
@@ -284,16 +284,16 @@ export default function DriverDashboard() {
           transition={{ delay: 0.2, type: 'spring' }}
           className="absolute top-24 left-4 right-4 z-10"
         >
-          <div className="bg-red-500/10 backdrop-blur-md p-6 rounded-3xl border-2 border-red-500/50 shadow-sm text-center relative overflow-hidden">
+          <div className="bg-red-500/10 backdrop-blur-md p-6 rounded-3xl border-2 border-red-500/50 shadow-[0_2px_12px_rgba(0,0,0,0.03)] text-center relative overflow-hidden">
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-red-500/20 blur-[30px] rounded-full pointer-events-none" />
-            <XCircle className="w-12 h-12 text-red-500 mx-auto mb-3 drop-shadow-sm" />
+            <XCircle className="w-12 h-12 text-red-500 mx-auto mb-3 drop-shadow-[0_2px_12px_rgba(0,0,0,0.03)]" />
             <h3 className="text-xl font-black text-gray-900 mb-2 uppercase tracking-wide">Account Suspended</h3>
             <p className="text-sm text-red-100 font-medium mb-4">
               Your wallet balance has fallen below the minimum threshold. You owe the platform <span className="font-bold text-gray-900">₦{Math.abs(walletBalance).toLocaleString()}</span> from cash trips.
             </p>
             <button 
               onClick={() => setWalletBalance(1500)}
-              className="w-full py-3 bg-red-500 text-white rounded-xl font-black text-sm tracking-widest uppercase hover:bg-red-600 transition-colors shadow-lg shadow-red-500/30"
+              className="w-full py-3 bg-red-500 text-white rounded-3xl font-black text-sm tracking-widest uppercase hover:bg-red-600 transition-colors shadow-lg shadow-red-500/30"
             >
               Pay Outstanding Balance
             </button>
@@ -302,7 +302,7 @@ export default function DriverDashboard() {
       ) : null}
       {/* Bottom Sheet UI */}
       <div className="absolute bottom-[72px] w-full z-10 px-4">
-        <div className="bg-white border border-gray-100 shadow-sm rounded-[2.5rem] shadow-sm p-6 relative border border-gray-200">
+        <div className="bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] rounded-[2.5rem] shadow-[0_2px_12px_rgba(0,0,0,0.03)] p-6 relative border border-slate-100">
           
           {/* Circular GO Button */}
           <div className="absolute -top-12 right-6">
@@ -312,7 +312,7 @@ export default function DriverDashboard() {
               onClick={handleGoOnline}
               className={`relative w-24 h-24 rounded-full flex items-center justify-center shadow-2xl overflow-hidden border-[3px] transition-all duration-500 ${
                 isSuspended ? 'bg-slate-800 text-slate-500 border-slate-700 cursor-not-allowed' :
-                isOnline ? 'bg-red-500 text-white border-red-400 shadow-sm' : 'bg-[#000000] text-white hover:bg-[#1e293b] border-transparent'
+                isOnline ? 'bg-red-500 text-white border-red-400 shadow-[0_2px_12px_rgba(0,0,0,0.03)]' : 'bg-[#000000] text-white hover:bg-[#1e293b] border-transparent'
               }`}
             >
               {/* Radar pulse when online */}
@@ -326,7 +326,7 @@ export default function DriverDashboard() {
               {!isOnline && (
                 <div className="absolute inset-0 rounded-full animate-pulse bg-white/20 pointer-events-none" />
               )}
-              <span className="text-2xl font-black relative z-10 font-heading tracking-widest text-shadow-sm">
+              <span className="text-2xl font-black relative z-10 font-heading tracking-widest text-shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
                 {isOnline ? 'STOP' : 'GO'}
               </span>
             </motion.button>
@@ -360,7 +360,7 @@ export default function DriverDashboard() {
   // REQUEST MODAL VIEW
   // -------------------------------------------------------------
   const renderRequest = () => (
-    <div className="relative w-full h-screen bg-gray-50 flex flex-col items-center justify-center overflow-hidden">
+    <div className="relative w-full h-screen bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
       {/* Blurred Map Background */}
       <div className="absolute inset-0 z-0 opacity-40 mix-blend-luminosity blur-md">
         <LiveMap />
@@ -376,7 +376,7 @@ export default function DriverDashboard() {
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#04265E] to-[#00A3C4]" />
 
         {/* Header */}
-        <div className="py-8 text-center relative border-b border-gray-100">
+        <div className="py-8 text-center relative border-b border-slate-100">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-orange-500/20 blur-[40px] pointer-events-none rounded-full" />
           <h2 className="text-3xl font-black gradient-text-cyan mb-2 tracking-tight font-heading">New Request!</h2>
           <p className="text-slate-400 text-sm font-medium">Passenger waiting nearby</p>
@@ -387,8 +387,8 @@ export default function DriverDashboard() {
           <div className="relative pl-8 mb-8">
             {/* Timeline graphics */}
             <div className="absolute left-2.5 top-3 bottom-3 w-px bg-white/10"></div>
-            <div className="absolute left-1.5 top-2 w-2.5 h-2.5 rounded-full bg-orange-500 shadow-sm"></div>
-            <div className="absolute left-1.5 bottom-2 w-2.5 h-2.5 rounded-full bg-blue-400 shadow-sm"></div>
+            <div className="absolute left-1.5 top-2 w-2.5 h-2.5 rounded-full bg-orange-500 shadow-[0_2px_12px_rgba(0,0,0,0.03)]"></div>
+            <div className="absolute left-1.5 bottom-2 w-2.5 h-2.5 rounded-full bg-blue-400 shadow-[0_2px_12px_rgba(0,0,0,0.03)]"></div>
             
             <div className="mb-6">
               <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Pickup</p>
@@ -401,7 +401,7 @@ export default function DriverDashboard() {
             </div>
           </div>
 
-          <div className="flex justify-between items-center mb-8 bg-white/5 p-4 rounded-2xl border border-gray-100">
+          <div className="flex justify-between items-center mb-8 bg-white/5 p-5 rounded-3xl border border-slate-100">
             <div>
               <div className="flex items-center gap-1.5 text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1">
                 <Wallet className="w-3.5 h-3.5" /> Fare
@@ -433,7 +433,7 @@ export default function DriverDashboard() {
               </svg>
               <span className="text-4xl font-black text-gray-900 font-heading">{countdown}</span>
               {/* Pulse glow dot */}
-              <div className="absolute top-0 right-14 w-2 h-2 rounded-full bg-cyan-500 shadow-sm"></div>
+              <div className="absolute top-0 right-14 w-2 h-2 rounded-full bg-cyan-500 shadow-[0_2px_12px_rgba(0,0,0,0.03)]"></div>
             </div>
           </div>
 
@@ -443,13 +443,13 @@ export default function DriverDashboard() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={handleAcceptRequest}
-              className="w-full py-4 bg-gradient-to-r from-emerald-500 to-green-500 text-gray-900 rounded-2xl font-black text-lg flex items-center justify-center gap-2 shadow-sm transition-all ripple-container"
+              className="w-full py-4 bg-gradient-to-r from-emerald-500 to-green-500 text-gray-900 rounded-3xl font-black text-lg flex items-center justify-center gap-2 shadow-[0_2px_12px_rgba(0,0,0,0.03)] transition-all ripple-container"
             >
               <CheckCircle2 className="w-6 h-6" /> ACCEPT RIDE
             </motion.button>
             <button 
               onClick={handleDeclineRequest}
-              className="w-full py-4 bg-white/5 border border-gray-200 text-slate-400 rounded-2xl font-bold text-sm transition-colors hover:bg-white/10 hover:text-gray-900"
+              className="w-full py-4 bg-white/5 border border-slate-100 text-slate-400 rounded-3xl font-bold text-sm transition-colors hover:bg-white/10 hover:text-gray-900"
             >
               Decline
             </button>
@@ -467,7 +467,7 @@ export default function DriverDashboard() {
     const availableSeats = 4 - activeRides.length;
 
     return (
-      <div className="relative w-full h-screen bg-gray-50 flex flex-col overflow-hidden">
+      <div className="relative w-full h-screen bg-slate-50 flex flex-col overflow-hidden">
         {/* 3D Map Background */}
         <div className="absolute inset-0 z-0">
           <LiveMap />
@@ -475,24 +475,24 @@ export default function DriverDashboard() {
 
         {/* Map Controls */}
         <div className="absolute right-4 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-10">
-          <button className="w-12 h-12 bg-white border border-gray-100 shadow-sm rounded-full flex items-center justify-center text-gray-900 hover:bg-white/10 transition-colors border border-gray-200">
+          <button className="w-12 h-12 bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] rounded-full flex items-center justify-center text-gray-900 hover:bg-white/10 transition-colors border border-slate-100">
             <Plus className="w-5 h-5" />
           </button>
-          <button className="w-12 h-12 bg-white border border-gray-100 shadow-sm rounded-full flex items-center justify-center text-gray-900 hover:bg-white/10 transition-colors border border-gray-200 mb-4">
+          <button className="w-12 h-12 bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] rounded-full flex items-center justify-center text-gray-900 hover:bg-white/10 transition-colors border border-slate-100 mb-4">
             <Minus className="w-5 h-5" />
           </button>
-          <button className="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center text-[#0f172a] hover:bg-gray-100 transition-transform active:scale-95">
+          <button className="w-12 h-12 bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex items-center justify-center text-slate-900 hover:bg-slate-100 transition-transform active:scale-95">
             <LocateFixed className="w-5 h-5" />
           </button>
         </div>
 
         {/* Bottom Sheet - Passenger Details Queue */}
         <div className="absolute bottom-0 w-full z-10">
-          <div className="bg-white border border-gray-100 shadow-sm rounded-t-[2.5rem] shadow-sm p-6 pt-8 relative border-t border-x border-gray-200 max-h-[60vh] overflow-y-auto flex flex-col">
+          <div className="bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] rounded-t-[2.5rem] shadow-[0_2px_12px_rgba(0,0,0,0.03)] p-6 pt-8 relative border-t border-x border-slate-100 max-h-[60vh] overflow-y-auto flex flex-col">
             {/* Handle */}
             <div className="absolute top-3 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-white/20 rounded-full sticky z-20"></div>
 
-            <div className="flex items-center justify-between mb-4 sticky top-0 bg-gray-50/90 backdrop-blur-md py-2 z-10 -mt-2">
+            <div className="flex items-center justify-between mb-4 sticky top-0 bg-slate-50/90 backdrop-blur-md py-2 z-10 -mt-2">
               <h2 className="text-xl font-black text-gray-900 tracking-tight">Active Route</h2>
               {isCarpool && (
                 <div className="bg-cyan-500/20 px-3 py-1 rounded-full border border-cyan-500/30">
@@ -503,7 +503,7 @@ export default function DriverDashboard() {
 
             <div className="space-y-4">
               {activeRides.map((ride) => (
-                <div key={ride.id} className="bg-[#112240] rounded-2xl p-4 border border-gray-200">
+                <div key={ride.id} className="bg-[#112240] rounded-3xl p-5 border border-slate-100">
                   <div className="flex justify-between items-start mb-3">
                     <div className="flex items-center gap-3">
                       <div className="relative">
@@ -512,7 +512,7 @@ export default function DriverDashboard() {
                       <div>
                         <h3 className="text-base font-black text-gray-900 flex items-center gap-2">
                           {ride.passengerName}
-                          <span className="bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm uppercase">
+                          <span className="bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-[10px] font-bold px-2 py-0.5 rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.03)] uppercase">
                             {ride.service === 'SOLO' ? 'Solo' : 'Pool'}
                           </span>
                         </h3>
@@ -545,7 +545,7 @@ export default function DriverDashboard() {
                     {ride.status === 'accepted' && (
                       <button 
                         onClick={() => arriveRide(ride.id)}
-                        className="flex-1 py-2.5 bg-white/10 text-gray-900 hover:bg-white/20 rounded-xl font-bold text-xs uppercase tracking-wide transition-colors border border-gray-100"
+                        className="flex-1 py-2.5 bg-white/10 text-gray-900 hover:bg-white/20 rounded-3xl font-bold text-xs uppercase tracking-wide transition-colors border border-slate-100"
                       >
                         Arrived at Pickup
                       </button>
@@ -555,7 +555,7 @@ export default function DriverDashboard() {
                       <>
                         <button 
                           onClick={() => pickupRide(ride.id)}
-                          className="flex-1 py-2.5 bg-gradient-to-r from-emerald-500 to-green-500 text-gray-900 rounded-xl font-bold text-xs uppercase tracking-wide transition-all shadow-sm"
+                          className="flex-1 py-2.5 bg-gradient-to-r from-emerald-500 to-green-500 text-gray-900 rounded-3xl font-bold text-xs uppercase tracking-wide transition-all shadow-[0_2px_12px_rgba(0,0,0,0.03)]"
                         >
                           Picked Up
                         </button>
@@ -564,7 +564,7 @@ export default function DriverDashboard() {
                             await cancelRide(ride.id);
                             if (activeRides.length <= 1) setCurrentView('HOME');
                           }}
-                          className="flex-1 py-2.5 bg-red-500/10 text-red-400 hover:bg-red-500/20 border border-red-500/20 rounded-xl font-bold text-xs uppercase tracking-wide transition-colors"
+                          className="flex-1 py-2.5 bg-red-500/10 text-red-400 hover:bg-red-500/20 border border-red-500/20 rounded-3xl font-bold text-xs uppercase tracking-wide transition-colors"
                         >
                           No-Show
                         </button>
@@ -577,7 +577,7 @@ export default function DriverDashboard() {
                           await completeRide(ride.id);
                           if (activeRides.length <= 1) setCurrentView('HOME');
                         }}
-                        className="flex-1 py-2.5 bg-[#000000] text-white hover:bg-[#1e293b] rounded-xl font-black text-xs uppercase tracking-widest shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-1"
+                        className="flex-1 py-2.5 bg-[#000000] text-white hover:bg-[#1e293b] rounded-3xl font-black text-xs uppercase tracking-widest shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-1"
                       >
                         <MapPin className="w-4 h-4" /> Drop Off at {ride.dropoff}
                       </button>
@@ -598,29 +598,29 @@ export default function DriverDashboard() {
             {showChatModal && activeChatRideId && (
               <div className="absolute inset-0 z-50 bg-black/50 flex flex-col justify-end">
                 <div className="bg-white h-[80%] rounded-t-3xl shadow-2xl flex flex-col overflow-hidden">
-                  <div className="bg-gray-50 p-4 text-gray-900 flex justify-between items-center">
+                  <div className="bg-slate-50 p-5 text-gray-900 flex justify-between items-center">
                     <h3 className="font-bold">Chat with Passenger</h3>
                     <button onClick={() => {setShowChatModal(false); setActiveChatRideId(null);}} className="text-gray-900 bg-white/20 p-1 rounded-full"><ArrowLeft className="w-4 h-4 rotate-180"/></button>
                   </div>
-                  <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50">
+                  <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-5 space-y-3 bg-slate-50">
                     {activeRides.find(r => r.id === activeChatRideId)?.messages?.map((msg, idx) => (
                       <div key={idx} className={`flex ${msg.sender === 'driver' ? 'justify-end' : 'justify-start'}`}>
-                        <div className={`max-w-[80%] rounded-2xl px-4 py-2 text-sm ${msg.sender === 'driver' ? 'bg-[#00C9E8] text-[#0f172a] rounded-br-none font-bold' : 'bg-gray-200 text-gray-800 rounded-bl-none'}`}>
+                        <div className={`max-w-[80%] rounded-3xl px-4 py-2 text-sm ${msg.sender === 'driver' ? 'bg-[#00C9E8] text-slate-900 rounded-br-none font-bold' : 'bg-slate-200 text-gray-800 rounded-bl-none'}`}>
                           {msg.text}
                         </div>
                       </div>
                     ))}
                     {(!activeRides.find(r => r.id === activeChatRideId)?.messages?.length) && (
-                      <p className="text-center text-gray-400 text-sm mt-10 font-medium">No messages yet. Say hi!</p>
+                      <p className="text-center text-slate-400 text-sm mt-10 font-medium">No messages yet. Say hi!</p>
                     )}
                   </div>
-                  <div className="p-4 bg-white border-t border-gray-100 flex gap-2">
+                  <div className="p-5 bg-white border-t border-slate-100 flex gap-2">
                     <input 
                       type="text" 
                       value={chatMessage}
                       onChange={(e) => setChatMessage(e.target.value)}
                       placeholder="Type a message..."
-                      className="flex-1 bg-gray-100 rounded-full px-4 py-2 outline-none focus:ring-2 focus:ring-[#00C9E8] text-black"
+                      className="flex-1 bg-slate-100 rounded-full px-4 py-2 outline-none focus:ring-2 focus:ring-[#00C9E8] text-black"
                     />
                     <button 
                       onClick={async () => {
@@ -628,7 +628,7 @@ export default function DriverDashboard() {
                         await sendRideMessage(activeChatRideId, 'driver', chatMessage);
                         setChatMessage('');
                       }} 
-                      className="bg-gray-50 text-gray-900 px-4 py-2 rounded-full font-bold"
+                      className="bg-slate-50 text-gray-900 px-4 py-2 rounded-full font-bold"
                     >
                       Send
                     </button>
@@ -647,14 +647,14 @@ export default function DriverDashboard() {
   // EARNINGS VIEW
   // -------------------------------------------------------------
   const renderEarnings = () => (
-    <div className="w-full h-screen bg-gray-50 flex flex-col overflow-y-auto pb-32 font-sans relative">
+    <div className="w-full h-screen bg-slate-50 flex flex-col overflow-y-auto pb-32 font-sans relative">
       
       {/* Background Orbs */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 blur-[80px] rounded-full pointer-events-none" />
       <div className="absolute bottom-40 left-0 w-64 h-64 bg-blue-500/10 blur-[80px] rounded-full pointer-events-none" />
 
       {/* Header Profile */}
-      <div className="bg-white border border-gray-100 shadow-sm px-6 py-5 flex items-center justify-between sticky top-0 z-20 border-b border-gray-100">
+      <div className="bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] px-6 py-5 flex items-center justify-between sticky top-0 z-20 border-b border-slate-100">
         <div className="flex items-center gap-3">
           <Menu className="w-6 h-6 text-gray-900" />
           <h1 className="text-xl font-bold text-gray-900 tracking-tight font-heading">Earnings</h1>
@@ -671,7 +671,7 @@ export default function DriverDashboard() {
           
           <div className="relative z-10">
             <p className="text-[10px] font-black text-slate-400 tracking-widest uppercase mb-2">Total Balance</p>
-            <h2 className="text-5xl font-black gradient-text-cyan mb-1 tracking-tight font-heading drop-shadow-sm">₦5,420</h2>
+            <h2 className="text-5xl font-black gradient-text-cyan mb-1 tracking-tight font-heading drop-shadow-[0_2px_12px_rgba(0,0,0,0.03)]">₦5,420</h2>
             <p className="text-sm text-slate-400 mb-8 font-medium">Available for instant withdrawal</p>
 
             {/* Premium Chart Dashboard */}
@@ -687,14 +687,14 @@ export default function DriverDashboard() {
               ].map((item, i) => (
                 <div key={i} className="w-[10%] h-full flex flex-col justify-end items-center gap-2 group relative">
                   {/* Tooltip on hover */}
-                  <div className="absolute -top-8 bg-gray-50 text-gray-900 text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  <div className="absolute -top-8 bg-slate-50 text-gray-900 text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                     ₦{(item.h * 85).toLocaleString()}
                   </div>
                   <motion.div 
                     initial={{ height: 0 }}
                     animate={{ height: `${item.h}%` }}
                     transition={{ duration: 1, delay: i * 0.1, type: "spring" }}
-                    className={`w-full rounded-t-md transition-all ${item.day === 'Fri' ? 'bg-gradient-to-t from-cyan-500 to-[#00E5FF] shadow-sm' : 'bg-gradient-to-t from-orange-500/20 to-cyan-500/50 hover:to-cyan-400 group-hover:from-orange-500/40'}`}
+                    className={`w-full rounded-t-md transition-all ${item.day === 'Fri' ? 'bg-gradient-to-t from-cyan-500 to-[#00E5FF] shadow-[0_2px_12px_rgba(0,0,0,0.03)]' : 'bg-gradient-to-t from-orange-500/20 to-cyan-500/50 hover:to-cyan-400 group-hover:from-orange-500/40'}`}
                   />
                   <span className={`text-[10px] font-bold absolute -bottom-6 ${item.day === 'Fri' ? 'text-cyan-400' : 'text-slate-400'}`}>{item.day}</span>
                 </div>
@@ -702,7 +702,7 @@ export default function DriverDashboard() {
               <div className="absolute bottom-6 left-0 right-0 h-px bg-white/10" />
             </div>
             
-            <button className="w-full bg-[#000000] text-white hover:bg-[#1e293b] font-black py-4 px-6 rounded-2xl flex items-center justify-center gap-2 ripple-container">
+            <button className="w-full bg-[#000000] text-white hover:bg-[#1e293b] font-black py-4 px-6 rounded-3xl flex items-center justify-center gap-2 ripple-container">
               <CreditCard className="w-5 h-5" />
               WITHDRAW FUNDS
             </button>
@@ -710,7 +710,7 @@ export default function DriverDashboard() {
         </div>
 
         {/* Weekly Breakdown Glass Card */}
-        <div className="bg-white border border-gray-100 shadow-sm rounded-[1.5rem] p-6 border border-gray-200 shadow-lg">
+        <div className="bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] rounded-[1.5rem] p-6 border border-slate-100 shadow-lg">
           <p className="text-[10px] font-black text-slate-400 tracking-widest uppercase mb-5">Weekly Overview</p>
           <div className="space-y-4">
             <div className="flex justify-between items-center">
@@ -728,12 +728,12 @@ export default function DriverDashboard() {
             <div className="h-px bg-white/10 my-2" />
             <div className="flex justify-between items-center">
               <span className="text-cyan-500 font-bold">Net Earnings</span>
-              <span className="font-black text-cyan-500 text-xl font-heading drop-shadow-sm"><span className="text-sm text-cyan-500/70 mr-0.5">₦</span>5,420</span>
+              <span className="font-black text-cyan-500 text-xl font-heading drop-shadow-[0_2px_12px_rgba(0,0,0,0.03)]"><span className="text-sm text-cyan-500/70 mr-0.5">₦</span>5,420</span>
             </div>
           </div>
 
           {/* Pro Tip Callout */}
-          <div className="mt-7 bg-orange-500/10 rounded-2xl p-5 border border-orange-500/20">
+          <div className="mt-7 bg-orange-500/10 rounded-3xl p-5 border border-orange-500/20">
             <p className="text-[10px] font-black text-cyan-500 uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
               <Zap className="w-3.5 h-3.5 fill-cyan-500" /> Pro Tip
             </p>
@@ -752,9 +752,9 @@ export default function DriverDashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="bg-white border border-gray-100 shadow-sm rounded-[1.25rem] p-4 flex items-center gap-4 border border-gray-100 hover:bg-white/10 hover:border-gray-200 transition-all cursor-pointer group"
+              className="bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] rounded-[1.25rem] p-5 flex items-center gap-5 border border-slate-100 hover:bg-white/10 hover:border-slate-100 transition-all cursor-pointer group"
             >
-              <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center flex-shrink-0 border border-orange-500/20 group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 bg-orange-500/20 rounded-3xl flex items-center justify-center flex-shrink-0 border border-orange-500/20 group-hover:scale-110 transition-transform">
                 <Calendar className="w-5 h-5 text-cyan-500" />
               </div>
               <div className="flex-1">
@@ -771,9 +771,9 @@ export default function DriverDashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-white border border-gray-100 shadow-sm rounded-[1.25rem] p-4 flex items-center gap-4 border border-gray-100 hover:bg-white/10 hover:border-gray-200 transition-all cursor-pointer group"
+              className="bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] rounded-[1.25rem] p-5 flex items-center gap-5 border border-slate-100 hover:bg-white/10 hover:border-slate-100 transition-all cursor-pointer group"
             >
-              <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center flex-shrink-0 border border-gray-200 group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 bg-white/5 rounded-3xl flex items-center justify-center flex-shrink-0 border border-slate-100 group-hover:scale-110 transition-transform">
                 <History className="w-5 h-5 text-slate-400" />
               </div>
               <div className="flex-1">
@@ -795,13 +795,13 @@ export default function DriverDashboard() {
   // ALL REQUESTS LIST VIEW
   // -------------------------------------------------------------
   const renderRequestsList = () => (
-    <div className="w-full h-screen bg-gray-50 flex flex-col overflow-y-auto pb-32 font-sans relative">
+    <div className="w-full h-screen bg-slate-50 flex flex-col overflow-y-auto pb-32 font-sans relative">
       <div className="absolute top-0 left-0 w-64 h-64 bg-orange-500/10 blur-[80px] rounded-full pointer-events-none" />
       
       {/* Header */}
-      <div className="bg-white border border-gray-100 shadow-sm px-6 py-5 flex items-center justify-between sticky top-0 z-20 border-b border-gray-100">
+      <div className="bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] px-6 py-5 flex items-center justify-between sticky top-0 z-20 border-b border-slate-100">
         <h1 className="text-xl font-bold text-gray-900 tracking-tight font-heading">Available Requests</h1>
-        <div className="bg-white/10 px-3 py-1 rounded-full border border-gray-200">
+        <div className="bg-white/10 px-3 py-1 rounded-full border border-slate-100">
           <span className="text-xs font-bold text-cyan-500">{allPendingRides.length}</span>
         </div>
       </div>
@@ -809,7 +809,7 @@ export default function DriverDashboard() {
       <div className="p-5 space-y-4 relative z-10">
         {allPendingRides.length === 0 ? (
           <div className="flex flex-col items-center justify-center mt-20 text-center">
-            <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-4 border border-gray-200">
+            <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-4 border border-slate-100">
               <Bell className="w-8 h-8 text-slate-500" />
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">No active requests</h3>
@@ -822,17 +822,17 @@ export default function DriverDashboard() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1, type: "spring", stiffness: 300, damping: 24 }}
-              className="bg-white border border-gray-100 shadow-sm p-0 border border-gray-200 relative overflow-hidden group hover:border-orange-500/30 transition-colors rounded-2xl"
+              className="bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] p-0 border border-slate-100 relative overflow-hidden group hover:border-orange-500/30 transition-colors rounded-3xl"
             >
               {/* Ticket perforated edge simulation */}
-              <div className="absolute top-16 left-0 right-0 border-t-2 border-dashed border-gray-100" />
-              <div className="absolute top-16 -left-3 w-6 h-6 bg-gray-50 rounded-full border-r border-gray-100 -translate-y-1/2" />
-              <div className="absolute top-16 -right-3 w-6 h-6 bg-gray-50 rounded-full border-l border-gray-100 -translate-y-1/2" />
+              <div className="absolute top-16 left-0 right-0 border-t-2 border-dashed border-slate-100" />
+              <div className="absolute top-16 -left-3 w-6 h-6 bg-slate-50 rounded-full border-r border-slate-100 -translate-y-1/2" />
+              <div className="absolute top-16 -right-3 w-6 h-6 bg-slate-50 rounded-full border-l border-slate-100 -translate-y-1/2" />
 
               <div className="p-5 pb-4">
                 <div className="flex justify-between items-start mb-6">
                   <div className="flex items-center gap-3">
-                    <img src={`https://i.pravatar.cc/150?u=${ride.passengerId}`} alt="User" className="w-10 h-10 rounded-full border border-gray-200" />
+                    <img src={`https://i.pravatar.cc/150?u=${ride.passengerId}`} alt="User" className="w-10 h-10 rounded-full border border-slate-100" />
                     <div>
                       <h3 className="text-lg font-bold text-gray-900 tracking-wide">{ride.passengerName}</h3>
                       <p className="text-[10px] text-cyan-500 uppercase tracking-widest font-black mt-0.5">
@@ -848,8 +848,8 @@ export default function DriverDashboard() {
                 
                 <div className="relative pl-6 mb-2 mt-4">
                   <div className="absolute left-1.5 top-2 bottom-2 w-px bg-white/10"></div>
-                  <div className="absolute left-0.5 top-1.5 w-2.5 h-2.5 rounded-full bg-orange-500 shadow-sm"></div>
-                  <div className="absolute left-0.5 bottom-1.5 w-2.5 h-2.5 rounded-full bg-blue-400 shadow-sm"></div>
+                  <div className="absolute left-0.5 top-1.5 w-2.5 h-2.5 rounded-full bg-orange-500 shadow-[0_2px_12px_rgba(0,0,0,0.03)]"></div>
+                  <div className="absolute left-0.5 bottom-1.5 w-2.5 h-2.5 rounded-full bg-blue-400 shadow-[0_2px_12px_rgba(0,0,0,0.03)]"></div>
                   
                   <div className="mb-4">
                     <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-0.5">Pickup</p>
@@ -876,7 +876,7 @@ export default function DriverDashboard() {
                       console.error(e);
                     }
                   }}
-                  className="w-full py-3.5 border border-gray-200 bg-gray-50/80 text-gray-900 rounded-xl font-black text-sm tracking-widest uppercase shadow-lg hover:shadow-sm transition-all flex items-center justify-center gap-2 overflow-hidden relative"
+                  className="w-full py-3.5 border border-slate-100 bg-slate-50/80 text-gray-900 rounded-3xl font-black text-sm tracking-widest uppercase shadow-lg hover:shadow-[0_2px_12px_rgba(0,0,0,0.03)] transition-all flex items-center justify-center gap-2 overflow-hidden relative"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-amber-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                   <span className="relative z-10 text-cyan-500 group-hover:text-gray-900 transition-colors">Accept Request</span>
@@ -905,7 +905,7 @@ export default function DriverDashboard() {
 
     return (
       <div className="absolute bottom-6 left-4 right-4 z-50 pointer-events-none">
-        <div className="pointer-events-auto bg-[#112240]/80 backdrop-blur-2xl border border-gray-200 shadow-sm rounded-3xl p-1.5 flex justify-between items-center max-w-sm mx-auto relative overflow-hidden">
+        <div className="pointer-events-auto bg-[#112240]/80 backdrop-blur-2xl border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] rounded-3xl p-1.5 flex justify-between items-center max-w-sm mx-auto relative overflow-hidden">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             // Simplified active state logic for the demo tabs
@@ -928,7 +928,7 @@ export default function DriverDashboard() {
                 {isActive && (
                   <motion.div 
                     layoutId="driver-nav-pill"
-                    className="absolute inset-0 bg-white/10 shadow-inner rounded-2xl -z-10 border border-gray-100"
+                    className="absolute inset-0 bg-white/10 shadow-inner rounded-3xl -z-10 border border-slate-100"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -940,7 +940,7 @@ export default function DriverDashboard() {
                   {isActive && (
                     <motion.div 
                       layoutId="driver-nav-dot"
-                      className="absolute -bottom-3 w-1 h-1 bg-cyan-500 rounded-full shadow-sm"
+                      className="absolute -bottom-3 w-1 h-1 bg-cyan-500 rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.03)]"
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
@@ -957,12 +957,12 @@ export default function DriverDashboard() {
   };
 
   if (isAuthChecking) {
-    return <div className="w-full h-screen bg-gray-50 flex items-center justify-center"><div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div></div>;
+    return <div className="w-full h-screen bg-slate-50 flex items-center justify-center"><div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div></div>;
   }
 
   return (
-    <div className="w-full h-screen bg-gray-50 flex justify-center overflow-hidden font-sans">
-      <div className="w-full max-w-md bg-gray-50 h-full relative overflow-hidden shadow-2xl sm:border-x sm:border-gray-200">
+    <div className="w-full h-screen bg-slate-50 flex justify-center overflow-hidden font-sans">
+      <div className="w-full max-w-md bg-slate-50 h-full relative overflow-hidden shadow-2xl sm:border-x sm:border-slate-100">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentView}
@@ -984,4 +984,5 @@ export default function DriverDashboard() {
     </div>
   );
 }
+
 

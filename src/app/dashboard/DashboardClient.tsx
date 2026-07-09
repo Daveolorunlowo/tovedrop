@@ -229,31 +229,31 @@ export default function PassengerDashboard() {
   // RIDE VIEW
   // -------------------------------------------------------------
   const renderRide = () => (
-    <div className="w-full h-full relative bg-gray-100 flex flex-col pb-24 overflow-hidden">
+    <div className="w-full h-full relative bg-slate-100 flex flex-col pb-24 overflow-hidden">
       {/* Real-time Map Background */}
       <div className="absolute inset-0 z-0">
         <LiveMap />
       </div>
 
       {/* Header */}
-      <div className="absolute top-0 w-full z-10 bg-white px-4 py-4 flex items-center justify-between border-b border-gray-100 shadow-sm">
+      <div className="absolute top-0 w-full z-10 bg-white px-4 py-4 flex items-center justify-between border-b border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
         <div className="flex items-center gap-3">
-          <button className="p-2 rounded-full hover:bg-gray-100 transition-colors">
-            <Menu className="w-6 h-6 text-[#0f172a]" />
+          <button className="p-2 rounded-full hover:bg-slate-100 transition-colors">
+            <Menu className="w-6 h-6 text-slate-900" />
           </button>
           <div className="flex items-center gap-2">
             <img src="/Tovedrop-removebg-preview.png" alt="Tove Drop Logo" className="h-8 w-auto object-contain" />
           </div>
         </div>
-        <div className="flex items-center gap-2 bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200">
+        <div className="flex items-center gap-2 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-100">
           <MapPin className="w-4 h-4 text-[#000000]" />
-          <span className="text-xs font-bold text-[#0f172a]">Main Campus</span>
+          <span className="text-xs font-bold text-slate-900">Main Campus</span>
         </div>
       </div>
 
       {/* Floating GPS Button */}
       <div className="absolute right-4 bottom-80 z-10 flex flex-col gap-3">
-        <button className="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-[#0f172a] hover:bg-gray-50 active:scale-95 transition-transform">
+        <button className="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-slate-900 hover:bg-slate-50 active:scale-95 transition-transform">
           <Search className="w-5 h-5" />
         </button>
         <button className="w-12 h-12 bg-[#000000] rounded-full shadow-md flex items-center justify-center text-white hover:bg-[#1e293b] active:scale-95 transition-transform relative">
@@ -270,29 +270,29 @@ export default function PassengerDashboard() {
         className="absolute bottom-[72px] w-full z-20 bg-white rounded-t-[2.5rem] shadow-[0_-20px_40px_rgba(0,0,0,0.15)] flex flex-col pt-3 pb-6 px-6 max-h-[85vh] overflow-y-auto"
       >
         {/* Handle */}
-        <div className="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6"></div>
+        <div className="w-12 h-1.5 bg-slate-200 rounded-full mx-auto mb-6"></div>
         
         <div className="mb-4 space-y-3">
           <div>
-            <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Your Name</label>
+            <label className="block text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">Your Name</label>
             <input 
               type="text" 
               value={passengerName}
               onChange={(e) => setPassengerName(e.target.value)}
               placeholder="Enter your name"
-              className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-[#0f172a] font-medium focus:outline-none focus:border-[#000000] focus:ring-1 focus:ring-[#000000]"
+              className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-[#000000] focus:ring-1 focus:ring-[#000000]"
             />
           </div>
 
           {/* Saved Places */}
           <div>
-            <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Saved Places</label>
+            <label className="block text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">Saved Places</label>
             <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
               {['Male Hostel', 'Library', 'Main Gate', 'Clinic'].map((place) => (
                 <button
                   key={place}
                   onClick={() => setDropoff(place)}
-                  className="bg-gray-100 hover:bg-gray-200 text-[#0f172a] px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-colors"
+                  className="bg-slate-100 hover:bg-slate-200 text-slate-900 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-colors"
                 >
                   📍 {place}
                 </button>
@@ -302,29 +302,29 @@ export default function PassengerDashboard() {
 
           <div className="flex gap-3">
             <div className="flex-1">
-              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Pickup</label>
+              <label className="block text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">Pickup</label>
               <input 
                 type="text" 
                 value={pickup}
                 onChange={(e) => setPickup(e.target.value)}
                 placeholder="e.g. Main Gate"
-                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-[#0f172a] font-medium focus:outline-none focus:border-[#000000] focus:ring-1 focus:ring-[#000000]"
+                className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-[#000000] focus:ring-1 focus:ring-[#000000]"
               />
             </div>
             <div className="flex-1">
-              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Drop-off</label>
+              <label className="block text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">Drop-off</label>
               <input 
                 type="text" 
                 value={dropoff}
                 onChange={(e) => setDropoff(e.target.value)}
                 placeholder="e.g. Block A"
-                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-[#0f172a] font-medium focus:outline-none focus:border-[#000000] focus:ring-1 focus:ring-[#000000]"
+                className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-[#000000] focus:ring-1 focus:ring-[#000000]"
               />
             </div>
           </div>
         </div>
 
-        <h2 className="text-2xl font-black text-[#0f172a] mb-6 font-heading">Select Service</h2>
+        <h2 className="text-2xl font-black text-slate-900 mb-6 font-heading">Select Service</h2>
 
         <div className="space-y-4 mb-6">
           {/* Solo Card */}
@@ -335,31 +335,31 @@ export default function PassengerDashboard() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => setSelectedService('SOLO')}
-            className={`w-full flex items-center justify-between p-4 rounded-2xl transition-all relative overflow-hidden mb-3 ${
+            className={`w-full flex items-center justify-between p-5 rounded-3xl transition-all relative overflow-hidden mb-3 ${
               selectedService === 'SOLO' 
                 ? 'bg-gradient-to-br from-orange-50 to-amber-50 border-2 border-[#000000] shadow-[0_4px_20px_rgba(4, 38, 94,0.15)]' 
-                : 'bg-white border-2 border-gray-100 shadow-sm hover:border-orange-200'
+                : 'bg-white border-2 border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:border-orange-200'
             }`}
           >
             {selectedService === 'SOLO' && (
               <div className="absolute inset-0 bg-gradient-to-r from-[#000000]/0 via-[#000000]/5 to-[#000000]/0 animate-shimmer pointer-events-none" />
             )}
-            <div className="flex items-center gap-4 relative z-10">
-              <div className={`w-14 h-14 rounded-xl flex items-center justify-center transition-colors ${
-                selectedService === 'SOLO' ? 'bg-[#000000] text-white shadow-md' : 'bg-gray-100 text-[#0f172a]'
+            <div className="flex items-center gap-5 relative z-10">
+              <div className={`w-14 h-14 rounded-3xl flex items-center justify-center transition-colors ${
+                selectedService === 'SOLO' ? 'bg-[#000000] text-white shadow-md' : 'bg-slate-100 text-slate-900'
               }`}>
                 <Car className="w-7 h-7" />
               </div>
               <div className="text-left">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="font-black text-[#0f172a] text-lg">Solo Ride</span>
+                  <span className="font-black text-slate-900 text-lg">Solo Ride</span>
                 </div>
-                <p className="text-sm text-gray-500 font-medium">1-4 seats • Private</p>
+                <p className="text-sm text-slate-500 font-medium">1-4 seats • Private</p>
               </div>
             </div>
             <div className="text-right relative z-10">
-              <span className="text-2xl font-black text-[#0f172a]">₦900</span>
-              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Flat Rate</p>
+              <span className="text-2xl font-black text-slate-900">₦900</span>
+              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Flat Rate</p>
             </div>
           </motion.button>
 
@@ -371,31 +371,31 @@ export default function PassengerDashboard() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => setSelectedService('CARPOOL')}
-            className={`w-full flex items-center justify-between p-4 rounded-2xl transition-all relative overflow-hidden ${
+            className={`w-full flex items-center justify-between p-5 rounded-3xl transition-all relative overflow-hidden ${
               selectedService === 'CARPOOL' 
                 ? 'bg-gradient-to-br from-orange-50 to-amber-50 border-2 border-[#000000] shadow-[0_4px_20px_rgba(4, 38, 94,0.15)]' 
-                : 'bg-white border-2 border-gray-100 shadow-sm hover:border-orange-200'
+                : 'bg-white border-2 border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:border-orange-200'
             }`}
           >
             {selectedService === 'CARPOOL' && (
               <div className="absolute inset-0 bg-gradient-to-r from-[#000000]/0 via-[#000000]/5 to-[#000000]/0 animate-shimmer pointer-events-none" />
             )}
-            <div className="flex items-center gap-4 relative z-10">
-              <div className={`w-14 h-14 rounded-xl flex items-center justify-center transition-colors ${
-                selectedService === 'CARPOOL' ? 'bg-[#000000] text-white shadow-md' : 'bg-gray-100 text-[#0f172a]'
+            <div className="flex items-center gap-5 relative z-10">
+              <div className={`w-14 h-14 rounded-3xl flex items-center justify-center transition-colors ${
+                selectedService === 'CARPOOL' ? 'bg-[#000000] text-white shadow-md' : 'bg-slate-100 text-slate-900'
               }`}>
                 <Bus className="w-7 h-7" />
               </div>
               <div className="text-left">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="font-black text-[#0f172a] text-lg">Carpool</span>
+                  <span className="font-black text-slate-900 text-lg">Carpool</span>
                 </div>
-                <p className="text-sm text-gray-500 font-medium">Shared • Affordable</p>
+                <p className="text-sm text-slate-500 font-medium">Shared • Affordable</p>
               </div>
             </div>
             <div className="text-right relative z-10">
-              <span className="text-2xl font-black text-[#0f172a]">₦250</span>
-              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Per Seat</p>
+              <span className="text-2xl font-black text-slate-900">₦250</span>
+              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Per Seat</p>
             </div>
           </motion.button>
         </div>
@@ -403,35 +403,35 @@ export default function PassengerDashboard() {
         <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-6"></div>
 
         {/* Payment Method */}
-        <div className="bg-white rounded-2xl p-4 flex items-center justify-between mb-6 shadow-sm border border-gray-100">
+        <div className="bg-white rounded-3xl p-5 flex items-center justify-between mb-6 shadow-[0_2px_12px_rgba(0,0,0,0.03)] border border-slate-100">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center text-[#000000]">
+            <div className="w-10 h-10 bg-slate-100 rounded-3xl flex items-center justify-center text-[#000000]">
               <Wallet className="w-5 h-5" />
             </div>
             <div>
-              <p className="font-bold text-[#0f172a] text-sm">Tove Wallet</p>
-              <p className="text-xs text-gray-500 font-medium">Balance: ₦{walletBalance.toLocaleString()}</p>
+              <p className="font-bold text-slate-900 text-sm">Tove Wallet</p>
+              <p className="text-xs text-slate-500 font-medium">Balance: ₦{walletBalance.toLocaleString()}</p>
             </div>
           </div>
           <button 
             onClick={() => setShowTopUp(true)}
-            className="flex items-center gap-1 text-[#0f172a] hover:bg-gray-100 font-bold text-sm bg-gray-50 px-3 py-1.5 rounded-lg transition-colors border border-gray-200"
+            className="flex items-center gap-1 text-slate-900 hover:bg-slate-100 font-bold text-sm bg-slate-50 px-3 py-1.5 rounded-lg transition-colors border border-slate-100"
           >
             <Plus className="w-4 h-4" /> Top Up
           </button>
         </div>
 
         {/* Schedule Toggle */}
-        <div className="flex bg-gray-100 p-1 rounded-xl mb-4">
+        <div className="flex bg-slate-100 p-1 rounded-3xl mb-4">
           <button 
             onClick={() => setIsScheduling(false)}
-            className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${!isScheduling ? 'bg-white shadow-sm text-[#0f172a]' : 'text-gray-500 hover:text-gray-700'}`}
+            className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${!isScheduling ? 'bg-white shadow-[0_2px_12px_rgba(0,0,0,0.03)] text-slate-900' : 'text-slate-500 hover:text-gray-700'}`}
           >
             Ride Now
           </button>
           <button 
             onClick={() => setIsScheduling(true)}
-            className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${isScheduling ? 'bg-white shadow-sm text-[#0f172a]' : 'text-gray-500 hover:text-gray-700'}`}
+            className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${isScheduling ? 'bg-white shadow-[0_2px_12px_rgba(0,0,0,0.03)] text-slate-900' : 'text-slate-500 hover:text-gray-700'}`}
           >
             Schedule
           </button>
@@ -446,23 +446,23 @@ export default function PassengerDashboard() {
               exit={{ height: 0, opacity: 0 }}
               className="mb-6 overflow-visible"
             >
-              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Select Date & Time</label>
+              <label className="block text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">Select Date & Time</label>
               <div className="flex gap-3">
                 <input 
                   type="date" 
                   value={scheduledDate}
                   onChange={(e) => setScheduledDate(e.target.value)}
                   min={new Date().toISOString().slice(0, 10)}
-                  className="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-[#0f172a] font-medium focus:outline-none focus:border-[#000000] focus:ring-1 focus:ring-[#000000]"
+                  className="flex-1 bg-slate-50 border border-slate-100 rounded-3xl px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-[#000000] focus:ring-1 focus:ring-[#000000]"
                 />
                 <input 
                   type="time" 
                   value={scheduledTimeOfDay}
                   onChange={(e) => setScheduledTimeOfDay(e.target.value)}
-                  className="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-[#0f172a] font-medium focus:outline-none focus:border-[#000000] focus:ring-1 focus:ring-[#000000]"
+                  className="flex-1 bg-slate-50 border border-slate-100 rounded-3xl px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-[#000000] focus:ring-1 focus:ring-[#000000]"
                 />
               </div>
-              <p className="text-xs text-gray-400 mt-2 flex items-center gap-1">
+              <p className="text-xs text-slate-400 mt-2 flex items-center gap-1">
                 <Clock className="w-3 h-3" />
                 You can schedule up to 24 hours in advance.
               </p>
@@ -472,17 +472,17 @@ export default function PassengerDashboard() {
 
         {/* Essential Details (Notes) */}
         <div className="mb-6">
-          <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Essential Details</label>
+          <label className="block text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">Essential Details</label>
           <textarea 
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Add any essential details (e.g. luggage, exact pickup spot...)"
-            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-[#0f172a] font-medium focus:outline-none focus:border-[#000000] focus:ring-1 focus:ring-[#000000] resize-none h-20"
+            className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-[#000000] focus:ring-1 focus:ring-[#000000] resize-none h-20"
           />
         </div>
 
         {/* Fare Disclaimer */}
-        <p className="text-center text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-3">
+        <p className="text-center text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-3">
           * Fares include 15% Tove Platform Fee
         </p>
 
@@ -492,9 +492,9 @@ export default function PassengerDashboard() {
           whileTap={{ scale: 0.98 }}
           onClick={handleRequestRide}
           disabled={isWaitingForDriver}
-          className={`relative w-full font-black py-4 rounded-xl text-lg transition-all flex justify-center items-center gap-3 overflow-hidden shadow-sm ${
+          className={`relative w-full font-black py-4 rounded-3xl text-lg transition-all flex justify-center items-center gap-3 overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.03)] ${
             isWaitingForDriver 
-              ? 'bg-gray-200 text-gray-500 cursor-wait shadow-none' 
+              ? 'bg-slate-200 text-slate-500 cursor-wait shadow-none' 
               : 'bg-[#000000] text-white hover:bg-[#1e293b]'
           }`}
         >
@@ -522,7 +522,7 @@ export default function PassengerDashboard() {
               animate={{ opacity: 1, height: 'auto', marginTop: 12 }}
               exit={{ opacity: 0, height: 0, marginTop: 0 }}
               onClick={handleCancelSearch}
-              className="w-full text-center py-3 font-bold text-red-500 hover:text-red-600 transition-colors bg-red-50 hover:bg-red-100 rounded-xl"
+              className="w-full text-center py-3 font-bold text-red-500 hover:text-red-600 transition-colors bg-red-50 hover:bg-red-100 rounded-3xl"
             >
               Cancel Search
             </motion.button>
@@ -548,7 +548,7 @@ export default function PassengerDashboard() {
 
     return (
       <div className="absolute bottom-6 left-4 right-4 z-50 pointer-events-none">
-        <div className="pointer-events-auto bg-white border border-gray-100 shadow-lg rounded-2xl p-1.5 flex justify-between items-center max-w-sm mx-auto relative overflow-hidden">
+        <div className="pointer-events-auto bg-white border border-slate-100 shadow-lg rounded-3xl p-1.5 flex justify-between items-center max-w-sm mx-auto relative overflow-hidden">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = currentView === tab.id;
@@ -557,13 +557,13 @@ export default function PassengerDashboard() {
                 key={tab.id}
                 onClick={() => setCurrentView(tab.id as ViewState)}
                 className={`relative z-10 flex flex-col items-center gap-1 py-2 px-1 w-full transition-colors duration-300 ${
-                  isActive ? 'text-[#0f172a]' : 'text-slate-400 hover:text-slate-600'
+                  isActive ? 'text-slate-900' : 'text-slate-400 hover:text-slate-600'
                 }`}
               >
                 {isActive && (
                   <motion.div 
                     layoutId="passenger-nav-pill"
-                    className="absolute inset-0 bg-gray-100 rounded-xl -z-10"
+                    className="absolute inset-0 bg-slate-100 rounded-3xl -z-10"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -591,19 +591,19 @@ export default function PassengerDashboard() {
   // We'll just show placeholders for the other views, keeping the styling premium
   const renderActivity = () => (
     <div className="w-full h-full bg-slate-50 flex flex-col p-6 overflow-y-auto pb-32">
-      <h2 className="text-2xl font-black text-[#0f172a] mb-6">Activity History</h2>
+      <h2 className="text-2xl font-black text-slate-900 mb-6">Activity History</h2>
       
       {historyRides.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center text-center">
-          <div className="w-20 h-20 bg-gray-100 text-gray-400 rounded-full flex items-center justify-center mb-6 shadow-inner">
+          <div className="w-20 h-20 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mb-6 shadow-inner">
             <History className="w-10 h-10" />
           </div>
           <p className="text-slate-500 font-medium">You have no past rides.</p>
         </div>
       ) : (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-5">
           {historyRides.map(ride => (
-            <div key={ride.id} className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3">
+            <div key={ride.id} className="bg-white p-5 rounded-3xl shadow-[0_2px_12px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col gap-3">
               <div className="flex justify-between items-center">
                 <span className="text-xs font-black text-slate-400 uppercase tracking-widest">
                   {new Date(ride.timestamp).toLocaleDateString()}
@@ -615,11 +615,11 @@ export default function PassengerDashboard() {
                 </span>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-[#0f172a]">
+                <div className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-900">
                   {ride.service === 'SOLO' ? <Car className="w-5 h-5" /> : <Bus className="w-5 h-5" />}
                 </div>
                 <div className="flex-1">
-                  <p className="text-[#0f172a] font-bold">{ride.dropoff}</p>
+                  <p className="text-slate-900 font-bold">{ride.dropoff}</p>
                   <p className="text-xs text-slate-500 font-medium">From: {ride.pickup}</p>
                 </div>
               </div>
@@ -632,22 +632,22 @@ export default function PassengerDashboard() {
 
   const renderSchedule = () => (
     <div className="w-full h-full bg-slate-50 flex flex-col p-6 overflow-y-auto pb-32">
-      <h2 className="text-2xl font-black text-[#0f172a] mb-6">Scheduled Rides</h2>
+      <h2 className="text-2xl font-black text-slate-900 mb-6">Scheduled Rides</h2>
       
       {scheduledRidesList.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center text-center">
-          <div className="w-20 h-20 bg-gray-100 text-gray-400 rounded-full flex items-center justify-center mb-6 shadow-inner">
+          <div className="w-20 h-20 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mb-6 shadow-inner">
             <Clock className="w-10 h-10" />
           </div>
           <p className="text-slate-500 font-medium">No upcoming scheduled rides.</p>
         </div>
       ) : (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-5">
           {scheduledRidesList.map(ride => (
-            <div key={ride.id} className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 relative overflow-hidden">
+            <div key={ride.id} className="bg-white p-5 rounded-3xl shadow-[0_2px_12px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col gap-3 relative overflow-hidden">
               <div className="absolute top-0 left-0 w-1 h-full bg-[#000000]" />
               <div className="flex justify-between items-center">
-                <span className="text-xs font-black text-[#0f172a] uppercase tracking-widest">
+                <span className="text-xs font-black text-slate-900 uppercase tracking-widest">
                   {ride.scheduledTime ? new Date(ride.scheduledTime).toLocaleString() : 'Pending Time'}
                 </span>
                 <span className="text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-md bg-orange-100 text-orange-600">
@@ -655,8 +655,8 @@ export default function PassengerDashboard() {
                 </span>
               </div>
               <div className="flex flex-col gap-1 mt-2">
-                <p className="text-[#0f172a] font-bold flex items-center gap-2"><MapPin className="w-4 h-4 text-emerald-500"/> {ride.pickup}</p>
-                <p className="text-[#0f172a] font-bold flex items-center gap-2"><MapPin className="w-4 h-4 text-orange-500"/> {ride.dropoff}</p>
+                <p className="text-slate-900 font-bold flex items-center gap-2"><MapPin className="w-4 h-4 text-emerald-500"/> {ride.pickup}</p>
+                <p className="text-slate-900 font-bold flex items-center gap-2"><MapPin className="w-4 h-4 text-orange-500"/> {ride.dropoff}</p>
               </div>
             </div>
           ))}
@@ -668,10 +668,10 @@ export default function PassengerDashboard() {
   const renderProfile = () => (
     <div className="w-full h-full bg-slate-50 flex flex-col pt-12 pb-24 px-6 overflow-y-auto">
       <div className="flex justify-between items-center mb-8">
-        <h2 className="text-3xl font-black text-[#0f172a] font-heading">Profile</h2>
+        <h2 className="text-3xl font-black text-slate-900 font-heading">Profile</h2>
         <button 
           onClick={() => setIsEditingProfile(!isEditingProfile)}
-          className="bg-white p-2.5 rounded-xl shadow-sm text-slate-600 hover:text-[#000000] transition-colors"
+          className="bg-white p-2.5 rounded-3xl shadow-[0_2px_12px_rgba(0,0,0,0.03)] text-slate-600 hover:text-[#000000] transition-colors"
         >
           <Edit2 className="w-5 h-5" />
         </button>
@@ -698,7 +698,7 @@ export default function PassengerDashboard() {
             </>
           )}
         </div>
-        <h3 className="text-xl font-black text-[#0f172a] mt-4">{profileName}</h3>
+        <h3 className="text-xl font-black text-slate-900 mt-4">{profileName}</h3>
         <p className="text-sm text-slate-500 font-medium">Passenger</p>
       </div>
 
@@ -710,10 +710,10 @@ export default function PassengerDashboard() {
               type="text" 
               value={profileName} 
               onChange={(e) => setProfileName(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-[#0f172a] font-bold focus:outline-none focus:border-[#000000]"
+              className="w-full bg-slate-50 border border-slate-200 rounded-3xl px-4 py-3 text-slate-900 font-bold focus:outline-none focus:border-[#000000]"
             />
           ) : (
-            <div className="text-[#0f172a] font-bold px-1">{profileName}</div>
+            <div className="text-slate-900 font-bold px-1">{profileName}</div>
           )}
         </div>
 
@@ -726,10 +726,10 @@ export default function PassengerDashboard() {
               type="email" 
               value={profileEmail} 
               onChange={(e) => setProfileEmail(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-[#0f172a] font-bold focus:outline-none focus:border-[#000000]"
+              className="w-full bg-slate-50 border border-slate-200 rounded-3xl px-4 py-3 text-slate-900 font-bold focus:outline-none focus:border-[#000000]"
             />
           ) : (
-            <div className="text-[#0f172a] font-bold px-1">{profileEmail}</div>
+            <div className="text-slate-900 font-bold px-1">{profileEmail}</div>
           )}
         </div>
 
@@ -743,10 +743,10 @@ export default function PassengerDashboard() {
               value={profileMatric} 
               onChange={(e) => setProfileMatric(e.target.value.toUpperCase())}
               placeholder="e.g. BU25MCT1045"
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-[#0f172a] font-bold focus:outline-none focus:border-[#000000]"
+              className="w-full bg-slate-50 border border-slate-200 rounded-3xl px-4 py-3 text-slate-900 font-bold focus:outline-none focus:border-[#000000]"
             />
           ) : (
-            <div className="text-[#0f172a] font-bold px-1">{profileMatric}</div>
+            <div className="text-slate-900 font-bold px-1">{profileMatric}</div>
           )}
         </div>
 
@@ -759,10 +759,10 @@ export default function PassengerDashboard() {
               type="tel" 
               value={profilePhone} 
               onChange={(e) => setProfilePhone(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-[#0f172a] font-bold focus:outline-none focus:border-[#000000]"
+              className="w-full bg-slate-50 border border-slate-200 rounded-3xl px-4 py-3 text-slate-900 font-bold focus:outline-none focus:border-[#000000]"
             />
           ) : (
-            <div className="text-[#0f172a] font-bold px-1">{profilePhone}</div>
+            <div className="text-slate-900 font-bold px-1">{profilePhone}</div>
           )}
         </div>
 
@@ -775,10 +775,10 @@ export default function PassengerDashboard() {
               type="text" 
               value={profileDept} 
               onChange={(e) => setProfileDept(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-[#0f172a] font-bold focus:outline-none focus:border-[#000000]"
+              className="w-full bg-slate-50 border border-slate-200 rounded-3xl px-4 py-3 text-slate-900 font-bold focus:outline-none focus:border-[#000000]"
             />
           ) : (
-            <div className="text-[#0f172a] font-bold px-1">{profileDept}</div>
+            <div className="text-slate-900 font-bold px-1">{profileDept}</div>
           )}
         </div>
       </div>
@@ -790,7 +790,7 @@ export default function PassengerDashboard() {
             animate={{ opacity: 1, y: 0, height: 'auto' }}
             exit={{ opacity: 0, y: 10, height: 0 }}
             onClick={handleSaveProfile}
-            className="mt-8 w-full py-4 bg-[#000000] hover:bg-[#1e293b] text-white rounded-2xl font-black text-lg tracking-wide shadow-lg transition-transform active:scale-95"
+            className="mt-8 w-full py-4 bg-[#000000] hover:bg-[#1e293b] text-white rounded-3xl font-black text-lg tracking-wide shadow-lg transition-transform active:scale-95"
           >
             SAVE CHANGES
           </motion.button>
@@ -802,7 +802,7 @@ export default function PassengerDashboard() {
           onClick={async () => {
             await signOut(auth);
           }}
-          className="w-full mt-2 py-4 bg-red-50 text-red-500 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-red-100 transition-colors"
+          className="w-full mt-2 py-4 bg-red-50 text-red-500 rounded-3xl font-bold flex items-center justify-center gap-2 hover:bg-red-100 transition-colors"
         >
           <LogOut className="w-5 h-5" />
           Log Out
@@ -817,7 +817,7 @@ export default function PassengerDashboard() {
 
   return (
     <div className="w-full h-screen bg-[#f8fafc] flex justify-center overflow-hidden font-sans">
-      <div className="w-full max-w-md bg-white h-full relative overflow-hidden shadow-sm sm:border-x sm:border-gray-200">
+      <div className="w-full max-w-md bg-white h-full relative overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.03)] sm:border-x sm:border-slate-100">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentView}
@@ -843,20 +843,20 @@ export default function PassengerDashboard() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 z-50 bg-[#0f172a]/40 backdrop-blur-sm flex items-center justify-center p-4"
+              className="absolute inset-0 z-50 bg-[#0f172a]/40 backdrop-blur-sm flex items-center justify-center p-5"
             >
               <motion.div 
                 initial={{ scale: 0.9, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.9, opacity: 0, y: 20 }}
-                className="bg-white w-full max-w-sm rounded-2xl overflow-hidden shadow-xl relative"
+                className="bg-white w-full max-w-sm rounded-3xl overflow-hidden shadow-xl relative"
               >
-                <div className="bg-gray-50 p-6 text-center relative border-b border-gray-100">
-                  <button onClick={() => setShowTopUp(false)} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><X className="w-5 h-5"/></button>
-                  <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3 border border-gray-200">
+                <div className="bg-slate-50 p-6 text-center relative border-b border-slate-100">
+                  <button onClick={() => setShowTopUp(false)} className="absolute top-5 right-4 text-slate-400 hover:text-gray-600"><X className="w-5 h-5"/></button>
+                  <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3 border border-slate-100">
                     <Wallet className="w-8 h-8 text-[#000000]" />
                   </div>
-                  <h3 className="text-xl font-black text-[#0f172a]">Fund Wallet</h3>
+                  <h3 className="text-xl font-black text-slate-900">Fund Wallet</h3>
                   <p className="text-slate-400 text-sm mt-1">Select or enter an amount</p>
                 </div>
                 
@@ -866,7 +866,7 @@ export default function PassengerDashboard() {
                       <button 
                         key={amt}
                         onClick={() => setTopUpAmount(amt.toString())}
-                        className={`py-2 rounded-xl font-bold text-sm transition-colors border ${topUpAmount === amt.toString() ? 'bg-[#000000] text-white border-[#000000]' : 'bg-slate-50 text-slate-600 border-slate-200 hover:border-[#000000]'}`}
+                        className={`py-2 rounded-3xl font-bold text-sm transition-colors border ${topUpAmount === amt.toString() ? 'bg-[#000000] text-white border-[#000000]' : 'bg-slate-50 text-slate-600 border-slate-200 hover:border-[#000000]'}`}
                       >
                         ₦{amt}
                       </button>
@@ -880,7 +880,7 @@ export default function PassengerDashboard() {
                       value={topUpAmount}
                       onChange={(e) => setTopUpAmount(e.target.value)}
                       placeholder="Custom Amount"
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-8 pr-4 py-3 text-[#0f172a] font-bold focus:outline-none focus:border-[#000000] text-lg"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-3xl pl-8 pr-4 py-3 text-slate-900 font-bold focus:outline-none focus:border-[#000000] text-lg"
                     />
                   </div>
                   
@@ -896,7 +896,7 @@ export default function PassengerDashboard() {
                          onClose: handlePaystackClose
                       });
                     }}
-                    className="w-full py-3 bg-[#000000] hover:bg-[#1e293b] text-white rounded-xl font-bold text-lg shadow-sm transition-transform active:scale-95 flex items-center justify-center gap-2"
+                    className="w-full py-3 bg-[#000000] hover:bg-[#1e293b] text-white rounded-3xl font-bold text-lg shadow-[0_2px_12px_rgba(0,0,0,0.03)] transition-transform active:scale-95 flex items-center justify-center gap-2"
                   >
                     Proceed to Pay
                   </button>
@@ -912,3 +912,4 @@ export default function PassengerDashboard() {
     </div>
   );
 }
+
