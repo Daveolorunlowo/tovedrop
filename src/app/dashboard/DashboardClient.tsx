@@ -22,7 +22,15 @@ type ViewState = 'RIDE' | 'ACTIVITY' | 'SCHEDULE' | 'PROFILE';
 export default function PassengerDashboard() {
   const router = useRouter();
   const [currentView, setCurrentView] = useState<ViewState>('RIDE');
+  const [isBookingMode, setIsBookingMode] = useState(false);
   const [selectedService, setSelectedService] = useState<'SOLO' | 'CARPOOL'>('SOLO');
+
+  const getTimeOfDayGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Morning';
+    if (hour < 17) return 'Afternoon';
+    return 'Evening';
+  };
   const [isWaitingForDriver, setIsWaitingForDriver] = useState(false);
   const [activeRideId, setActiveRideId] = useState<string | null>(null);
   const [isScheduling, setIsScheduling] = useState(false);
@@ -272,9 +280,60 @@ export default function PassengerDashboard() {
         {/* Handle */}
         <div className="w-12 h-1.5 bg-slate-200 rounded-full mx-auto mb-6"></div>
         
-        <div className="mb-4 space-y-3">
-          <div>
-            <label className="block text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">Your Name</label>
+        {!isBookingMode ? (
+          <div className="flex flex-col mb-4">
+            <h1 className="text-3xl font-black text-slate-900 mb-1 font-heading tracking-tight">
+              Good {getTimeOfDayGreeting()},{"\n"}{passengerName.split(' ')[0] || 'Alex'}! 👋
+            </h1>
+            <p className="text-base font-bold text-slate-500 mb-6">Where would you like to go today?</p>
+            
+            <button 
+              onClick={() => setIsBookingMode(true)}
+              className="w-full bg-slate-100 hover:bg-slate-200 text-left px-5 py-4 rounded-3xl transition-colors flex items-center gap-3 shadow-sm"
+            >
+              <Search className="w-6 h-6 text-slate-900" />
+              <span className="text-xl font-black text-slate-900">Where to?</span>
+            </button>
+
+            {/* Saved Places Quick Actions */}
+            <div className="mt-8">
+              <h3 className="text-sm font-bold text-slate-900 mb-4 px-1">Saved Places</h3>
+              <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                {['Male Hostel', 'Library', 'Main Gate', 'Clinic'].map((place) => (
+                  <button
+                    key={place}
+                    onClick={() => {
+                      setDropoff(place);
+                      setIsBookingMode(true);
+                    }}
+                    className="flex-shrink-0 bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] p-4 rounded-3xl w-28 flex flex-col items-center gap-3 active:scale-95 transition-transform hover:border-slate-300"
+                  >
+                    <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center text-slate-900">
+                      <MapPin className="w-6 h-6" />
+                    </div>
+                    <span className="text-[11px] font-bold text-slate-900 text-center w-full truncate">{place}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            <div className="h-12 w-full flex-shrink-0" />
+          </div>
+        ) : (
+          <>
+            <div className="flex items-center mb-6">
+              <button 
+                onClick={() => setIsBookingMode(false)}
+                className="p-2 -ml-2 rounded-full hover:bg-slate-100 transition-colors"
+              >
+                <ArrowLeft className="w-6 h-6 text-slate-900" />
+              </button>
+              <h2 className="text-2xl font-black text-slate-900 ml-2 font-heading tracking-tight">Plan your ride</h2>
+            </div>
+            
+            <div className="mb-4 space-y-3">
+              <div>
+                <label className="block text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">Your Name</label>
             <input 
               type="text" 
               value={passengerName}
@@ -522,12 +581,14 @@ export default function PassengerDashboard() {
               animate={{ opacity: 1, height: 'auto', marginTop: 12 }}
               exit={{ opacity: 0, height: 0, marginTop: 0 }}
               onClick={handleCancelSearch}
-              className="w-full text-center py-3 font-bold text-red-500 hover:text-red-600 transition-colors bg-red-50 hover:bg-red-100 rounded-3xl"
+              className="w-full text-center py-3 font-bold text-red-500 hover:text-red-600 transition-colors bg-red-50 hover:bg-red-100 rounded-2xl"
             >
               Cancel Search
             </motion.button>
           )}
         </AnimatePresence>
+        </>
+        )}
         
         {/* Extra padding to ensure the button isn't obstructed by bottom nav or screen edges */}
         <div className="h-12 w-full flex-shrink-0" />

@@ -20,8 +20,17 @@ type ViewState = 'HOME' | 'REQUEST' | 'REQUESTS' | 'ACTIVE' | 'EARNINGS';
 
 export default function DriverDashboard() {
   const router = useRouter();
+  
+  const getTimeOfDayGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Morning';
+    if (hour < 17) return 'Afternoon';
+    return 'Evening';
+  };
+  
   const [currentView, setCurrentView] = useState<ViewState>('HOME');
   const [isOnline, setIsOnline] = useState(false);
+  const [destinationMode, setDestinationMode] = useState('');
   const [countdown, setCountdown] = useState(15);
   const [pendingRide, setPendingRide] = useState<RideRequest | null>(null);
   const [allPendingRides, setAllPendingRides] = useState<RideRequest[]>([]);
@@ -300,9 +309,30 @@ export default function DriverDashboard() {
           </div>
         </motion.div>
       ) : null}
-      {/* Bottom Sheet UI */}
-      <div className="absolute bottom-[72px] w-full z-10 px-4">
-        <div className="bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] rounded-[2.5rem] shadow-[0_2px_12px_rgba(0,0,0,0.03)] p-6 relative border border-slate-100">
+      {/* Bottom UI */}
+      <div className="absolute bottom-[72px] w-full z-10 px-4 flex flex-col gap-4">
+        {/* Destination Mode / Greeting Card */}
+        <div className="bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] rounded-3xl p-5 relative z-10">
+           <h1 className="text-3xl font-black text-slate-900 mb-1 font-heading tracking-tight">
+              Good {getTimeOfDayGreeting()},{"\n"}Partner! 👋
+           </h1>
+           <p className="text-sm font-bold text-slate-500 mb-4">Where would you like to go today?</p>
+           
+           <div className="relative">
+             <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+               <Route className="w-5 h-5 text-slate-400" />
+             </div>
+             <input
+               type="text"
+               value={destinationMode}
+               onChange={(e) => setDestinationMode(e.target.value)}
+               placeholder="Enter destination (e.g. Home)"
+               className="w-full bg-slate-50 border border-slate-100 rounded-2xl pl-12 pr-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-[#000000] focus:ring-1 focus:ring-[#000000]"
+             />
+           </div>
+        </div>
+
+        <div className="bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] rounded-[2.5rem] p-6 relative mt-4">
           
           {/* Circular GO Button */}
           <div className="absolute -top-12 right-6">
