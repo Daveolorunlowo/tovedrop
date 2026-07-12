@@ -251,140 +251,196 @@ export default function DriverDashboard() {
   // -------------------------------------------------------------
   // HOME VIEW
   // -------------------------------------------------------------
-  const renderHome = () => (
-    <div className="relative w-full h-screen bg-slate-50 flex flex-col overflow-hidden">
-      {/* Real-time Map Background */}
-      <div className="absolute inset-0 z-0 opacity-80">
-        <LiveMap />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F] via-[#0A192F]/20 to-transparent pointer-events-none" />
-      </div>
-
-      {/* Header - Glassmorphism */}
-      <div className="absolute top-0 w-full z-10 bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] px-4 py-4 flex items-center justify-between border-b border-slate-100">
-        <div className="flex items-center gap-3">
-          <button className="p-2 rounded-full hover:bg-white/10 transition-colors">
-            <Menu className="w-6 h-6 text-gray-900" />
-          </button>
-          <div className="flex flex-col">
-            <span className="text-gray-900 font-bold tracking-wider">DRIVER DASHBOARD</span>
-          </div>
-        </div>
-        <button 
-          onClick={handleGoOnline}
-          className={`flex items-center gap-2 px-3 py-1.5 rounded-full transition-all border ${
-            isOnline ? 'bg-green-500/10 border-green-500/30' : 'bg-white/5 border-slate-100'
-          }`}
-        >
-          <span className={`text-[10px] font-black tracking-widest uppercase ${isOnline ? 'text-green-400' : 'text-slate-400'}`}>
-            {isOnline ? 'ONLINE' : 'OFFLINE'}
-          </span>
-          <div className="relative w-2 h-2">
-            <div className={`absolute inset-0 rounded-full ${isOnline ? 'bg-green-500' : 'bg-slate-500'}`} />
-            {isOnline && <div className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-75" />}
-          </div>
-        </button>
-      </div>
-
-      {/* Center UI based on suspension state */}
-      {isSuspended ? (
-        <motion.div 
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2, type: 'spring' }}
-          className="absolute top-24 left-4 right-4 z-10"
-        >
-          <div className="bg-red-500/10 backdrop-blur-md p-6 rounded-3xl border-2 border-red-500/50 shadow-[0_2px_12px_rgba(0,0,0,0.03)] text-center relative overflow-hidden">
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-red-500/20 blur-[30px] rounded-full pointer-events-none" />
-            <XCircle className="w-12 h-12 text-red-500 mx-auto mb-3 drop-shadow-[0_2px_12px_rgba(0,0,0,0.03)]" />
-            <h3 className="text-xl font-black text-gray-900 mb-2 uppercase tracking-wide">Account Suspended</h3>
-            <p className="text-sm text-red-100 font-medium mb-4">
-              Your wallet balance has fallen below the minimum threshold. You owe the platform <span className="font-bold text-gray-900">₦{Math.abs(walletBalance).toLocaleString()}</span> from cash trips.
-            </p>
-            <button 
-              onClick={() => setWalletBalance(1500)}
-              className="w-full py-3 bg-red-500 text-white rounded-3xl font-black text-sm tracking-widest uppercase hover:bg-red-600 transition-colors shadow-lg shadow-red-500/30"
-            >
-              Pay Outstanding Balance
+  const renderHome = () => {
+    if (!isOnline) {
+      return (
+        <div className={`w-full h-screen relative flex flex-col px-6 pt-16 pb-24 overflow-hidden transition-colors duration-1000 ${
+          getTimeOfDayGreeting() === 'Morning' ? 'bg-gradient-to-br from-amber-100 via-orange-50 to-white' : 
+          getTimeOfDayGreeting() === 'Afternoon' ? 'bg-gradient-to-br from-indigo-50 via-blue-50 to-white' : 
+          'bg-gradient-to-br from-[#0A192F] via-slate-800 to-slate-900'
+        }`}>
+          {/* Header Area */}
+          <div className="relative z-10 flex justify-between items-center mb-16">
+            <button className={`p-3 rounded-full backdrop-blur-md shadow-sm border ${getTimeOfDayGreeting() === 'Evening' ? 'bg-white/10 border-white/10 text-white' : 'bg-white/50 border-white/50 text-slate-900'}`}>
+              <Menu className="w-6 h-6" />
             </button>
+            <div className={`px-4 py-2 rounded-full backdrop-blur-md shadow-sm border font-bold text-xs tracking-widest uppercase ${getTimeOfDayGreeting() === 'Evening' ? 'bg-white/10 border-white/10 text-white' : 'bg-white/50 border-white/50 text-slate-900'}`}>
+              OFFLINE
+            </div>
           </div>
-        </motion.div>
-      ) : null}
-      {/* Bottom UI */}
-      <div className="absolute bottom-[72px] w-full z-10 px-4 flex flex-col gap-4">
-        {/* Destination Mode / Greeting Card */}
-        <div className="bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] rounded-3xl p-5 relative z-10">
-           <h1 className="text-3xl font-black text-slate-900 mb-1 font-heading tracking-tight">
-              Good {getTimeOfDayGreeting()},{"\n"}Partner! 👋
-           </h1>
-           <p className="text-sm font-bold text-slate-500 mb-4">Where would you like to go today?</p>
-           
-           <div className="relative">
-             <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-               <Route className="w-5 h-5 text-slate-400" />
-             </div>
-             <input
-               type="text"
-               value={destinationMode}
-               onChange={(e) => setDestinationMode(e.target.value)}
-               placeholder="Enter destination (e.g. Home)"
-               className="w-full bg-slate-50 border border-slate-100 rounded-2xl pl-12 pr-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-[#000000] focus:ring-1 focus:ring-[#000000]"
-             />
-           </div>
-        </div>
 
-        <div className="bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] rounded-[2.5rem] p-6 relative mt-4">
-          
-          {/* Circular GO Button */}
-          <div className="absolute -top-12 right-6">
+          {/* Center Avatar & Greeting */}
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, ease: "easeOut" }} className="relative z-10 flex flex-col items-center justify-center flex-1 mb-8">
+            <div className="relative mb-6">
+               <div className="absolute inset-0 bg-orange-400 blur-2xl opacity-20 rounded-full animate-pulse-ring" />
+               <img src="https://i.pravatar.cc/150?img=33" alt="Driver" className={`w-32 h-32 rounded-full border-4 shadow-2xl relative z-10 ${getTimeOfDayGreeting() === 'Evening' ? 'border-slate-800' : 'border-white'}`} />
+            </div>
+            
+            <h1 className={`text-4xl font-black mb-2 font-heading tracking-tight text-center ${getTimeOfDayGreeting() === 'Evening' ? 'text-white' : 'text-slate-900'}`}>
+              Ready to earn,<br/>Partner?
+            </h1>
+            <p className={`text-lg font-medium text-center ${getTimeOfDayGreeting() === 'Evening' ? 'text-slate-300' : 'text-slate-500'}`}>
+              Your city needs you.
+            </p>
+          </motion.div>
+
+          {/* The Orb (Go Online Button) */}
+          <div className="relative z-10 flex flex-col items-center mb-10">
             <motion.button 
-              whileHover={{ scale: isSuspended ? 1 : 1.05 }}
-              whileTap={{ scale: isSuspended ? 1 : 0.95 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={handleGoOnline}
-              className={`relative w-24 h-24 rounded-full flex items-center justify-center shadow-2xl overflow-hidden border-[3px] transition-all duration-500 ${
-                isSuspended ? 'bg-slate-800 text-slate-500 border-slate-700 cursor-not-allowed' :
-                isOnline ? 'bg-red-500 text-white border-red-400 shadow-[0_2px_12px_rgba(0,0,0,0.03)]' : 'bg-[#000000] text-white hover:bg-[#1e293b] border-transparent'
+              className={`relative w-32 h-32 rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.3)] border-[6px] border-white/10 transition-all duration-500 group overflow-hidden ${
+                isSuspended ? 'bg-slate-800 text-slate-500 cursor-not-allowed' : 'bg-gradient-to-tr from-[#000000] to-slate-800 text-white'
               }`}
             >
-              {/* Radar pulse when online */}
-              {isOnline && (
-                <>
-                  <div className="absolute inset-0 rounded-full animate-ping bg-red-400/40 pointer-events-none" />
-                  <div className="absolute w-[200%] h-[200%] bg-gradient-to-tr from-white/0 via-white/20 to-white/0 animate-spin-slow pointer-events-none" />
-                </>
-              )}
-              {/* Subtle breathe when offline */}
-              {!isOnline && (
-                <div className="absolute inset-0 rounded-full animate-pulse bg-white/20 pointer-events-none" />
-              )}
-              <span className="text-2xl font-black relative z-10 font-heading tracking-widest text-shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
-                {isOnline ? 'STOP' : 'GO'}
-              </span>
+              <div className="absolute inset-0 bg-white/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute inset-0 rounded-full animate-pulse bg-white/10 pointer-events-none" />
+              <span className="text-3xl font-black tracking-widest font-heading relative z-10">GO</span>
             </motion.button>
+            {isSuspended && (
+               <p className="mt-4 text-red-500 font-bold text-sm bg-red-50 px-4 py-2 rounded-full">Account Suspended</p>
+            )}
           </div>
 
-          <div className="flex justify-between items-end mt-2 pt-2">
-            <div>
-              <p className="text-[10px] text-cyan-500/80 font-black tracking-widest mb-1.5 uppercase">Today's Earnings</p>
-              <div className="flex items-center gap-2">
-                <Wallet className="w-5 h-5 text-cyan-500" />
-                <h2 className="text-4xl font-black text-gray-900 font-heading">₦1,250</h2>
-              </div>
+          {/* Destination Mode */}
+          <div className="relative z-10 w-full mt-auto">
+             <div className="relative">
+               <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none">
+                 <Route className={`w-6 h-6 ${getTimeOfDayGreeting() === 'Evening' ? 'text-cyan-400' : 'text-slate-400'}`} />
+               </div>
+               <input
+                 type="text"
+                 value={destinationMode}
+                 onChange={(e) => setDestinationMode(e.target.value)}
+                 placeholder="Heading home? Set a destination"
+                 className={`w-full rounded-[2rem] pl-14 pr-6 py-5 font-bold text-lg focus:outline-none transition-shadow shadow-sm backdrop-blur-xl ${
+                   getTimeOfDayGreeting() === 'Evening' 
+                     ? 'bg-white/10 border border-white/10 text-white placeholder-slate-400 focus:border-cyan-500 focus:shadow-[0_0_20px_rgba(6,182,212,0.2)]' 
+                     : 'bg-white/80 border border-white text-slate-900 placeholder-slate-400 focus:border-[#000000] focus:shadow-lg'
+                 }`}
+               />
+             </div>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="relative w-full h-screen bg-slate-50 flex flex-col overflow-hidden">
+        {/* Real-time Map Background */}
+        <div className="absolute inset-0 z-0 opacity-80">
+          <LiveMap />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F] via-[#0A192F]/20 to-transparent pointer-events-none" />
+        </div>
+  
+        {/* Header - Glassmorphism */}
+        <div className="absolute top-0 w-full z-10 bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] px-4 py-4 flex items-center justify-between border-b border-slate-100">
+          <div className="flex items-center gap-3">
+            <button className="p-2 rounded-full hover:bg-slate-100 transition-colors">
+              <Menu className="w-6 h-6 text-gray-900" />
+            </button>
+            <div className="flex flex-col">
+              <span className="text-gray-900 font-bold tracking-wider">DRIVER DASHBOARD</span>
             </div>
+          </div>
+          <button 
+            onClick={handleGoOnline}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-full transition-all border ${
+              isOnline ? 'bg-green-50 border-green-500/30' : 'bg-white/5 border-slate-100'
+            }`}
+          >
+            <span className={`text-[10px] font-black tracking-widest uppercase ${isOnline ? 'text-green-600' : 'text-slate-400'}`}>
+              {isOnline ? 'ONLINE' : 'OFFLINE'}
+            </span>
+            <div className="relative w-2 h-2">
+              <div className={`absolute inset-0 rounded-full ${isOnline ? 'bg-green-500' : 'bg-slate-500'}`} />
+              {isOnline && <div className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-75" />}
+            </div>
+          </button>
+        </div>
+  
+        {/* Center UI based on suspension state */}
+        {isSuspended ? (
+          <motion.div 
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2, type: 'spring' }}
+            className="absolute top-24 left-4 right-4 z-10"
+          >
+            <div className="bg-white p-6 rounded-3xl border border-red-100 shadow-[0_20px_40px_rgba(0,0,0,0.1)] text-center relative overflow-hidden">
+              <div className="absolute -top-10 -right-10 w-32 h-32 bg-red-500/10 blur-[30px] rounded-full pointer-events-none" />
+              <XCircle className="w-12 h-12 text-red-500 mx-auto mb-3" />
+              <h3 className="text-xl font-black text-gray-900 mb-2 uppercase tracking-wide">Account Suspended</h3>
+              <p className="text-sm text-slate-500 font-medium mb-4">
+                Your wallet balance has fallen below the minimum threshold. You owe the platform <span className="font-bold text-gray-900">₦{Math.abs(walletBalance).toLocaleString()}</span> from cash trips.
+              </p>
+              <button 
+                onClick={() => setWalletBalance(1500)}
+                className="w-full py-3 bg-red-500 text-white rounded-3xl font-black text-sm tracking-widest uppercase hover:bg-red-600 transition-colors shadow-lg shadow-red-500/30"
+              >
+                Pay Outstanding Balance
+              </button>
+            </div>
+          </motion.div>
+        ) : null}
+
+        {/* Bottom UI */}
+        <div className="absolute bottom-[72px] w-full z-10 px-4 flex flex-col gap-4">
+          <div className="bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] rounded-[2.5rem] p-6 relative mt-4">
             
-            <div className="w-px h-12 bg-white/10"></div>
-            
-            <div className="text-right">
-              <p className="text-[10px] text-slate-400 font-black tracking-widest mb-1.5 uppercase">Completed</p>
-              <div className="flex items-center gap-2 justify-end">
-                <h2 className="text-4xl font-black text-gray-900 font-heading">18</h2>
-                <Route className="w-5 h-5 text-slate-400" />
+            {/* Circular STOP Button */}
+            <div className="absolute -top-12 right-6">
+              <motion.button 
+                whileHover={{ scale: isSuspended ? 1 : 1.05 }}
+                whileTap={{ scale: isSuspended ? 1 : 0.95 }}
+                onClick={handleGoOnline}
+                className={`relative w-24 h-24 rounded-full flex items-center justify-center shadow-2xl overflow-hidden border-[3px] transition-all duration-500 ${
+                  isSuspended ? 'bg-slate-800 text-slate-500 border-slate-700 cursor-not-allowed' :
+                  isOnline ? 'bg-red-500 text-white border-red-400 shadow-[0_2px_12px_rgba(0,0,0,0.03)]' : 'bg-[#000000] text-white hover:bg-[#1e293b] border-transparent'
+                }`}
+              >
+                {/* Radar pulse when online */}
+                {isOnline && (
+                  <>
+                    <div className="absolute inset-0 rounded-full animate-ping bg-red-400/40 pointer-events-none" />
+                    <div className="absolute w-[200%] h-[200%] bg-gradient-to-tr from-white/0 via-white/20 to-white/0 animate-spin-slow pointer-events-none" />
+                  </>
+                )}
+                {/* Subtle breathe when offline */}
+                {!isOnline && (
+                  <div className="absolute inset-0 rounded-full animate-pulse bg-white/20 pointer-events-none" />
+                )}
+                <span className="text-2xl font-black relative z-10 font-heading tracking-widest text-shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
+                  {isOnline ? 'STOP' : 'GO'}
+                </span>
+              </motion.button>
+            </div>
+  
+            <div className="flex justify-between items-end mt-2 pt-2">
+              <div>
+                <p className="text-[10px] text-cyan-500/80 font-black tracking-widest mb-1.5 uppercase">Today's Earnings</p>
+                <div className="flex items-center gap-2">
+                  <Wallet className="w-5 h-5 text-cyan-500" />
+                  <h2 className="text-4xl font-black text-gray-900 font-heading">₦1,250</h2>
+                </div>
+              </div>
+              
+              <div className="w-px h-12 bg-slate-100"></div>
+              
+              <div className="text-right">
+                <p className="text-[10px] text-slate-400 font-black tracking-widest mb-1.5 uppercase">Completed</p>
+                <div className="flex items-center gap-2 justify-end">
+                  <h2 className="text-4xl font-black text-gray-900 font-heading">18</h2>
+                  <Route className="w-5 h-5 text-slate-400" />
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   // -------------------------------------------------------------
   // REQUEST MODAL VIEW

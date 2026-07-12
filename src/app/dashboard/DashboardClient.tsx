@@ -236,7 +236,77 @@ export default function PassengerDashboard() {
   // -------------------------------------------------------------
   // RIDE VIEW
   // -------------------------------------------------------------
-  const renderRide = () => (
+  const renderRide = () => {
+    if (!isBookingMode) {
+      return (
+        <div className={`w-full h-full relative flex flex-col px-6 pt-16 pb-24 overflow-hidden transition-colors duration-1000 ${
+          getTimeOfDayGreeting() === 'Morning' ? 'bg-gradient-to-br from-orange-50 via-rose-50 to-white' : 
+          getTimeOfDayGreeting() === 'Afternoon' ? 'bg-gradient-to-br from-blue-50 via-cyan-50 to-white' : 
+          'bg-gradient-to-br from-[#0A192F] via-slate-800 to-slate-900'
+        }`}>
+          {/* Header Area */}
+          <div className="relative z-10 flex justify-between items-center mb-10">
+            <button className={`p-3 rounded-full backdrop-blur-md shadow-sm border ${getTimeOfDayGreeting() === 'Evening' ? 'bg-white/10 border-white/10 text-white' : 'bg-white/50 border-white/50 text-slate-900'}`}>
+              <Menu className="w-6 h-6" />
+            </button>
+            <div className={`p-1 rounded-full backdrop-blur-md shadow-sm border ${getTimeOfDayGreeting() === 'Evening' ? 'bg-white/10 border-white/10' : 'bg-white/50 border-white/50'}`}>
+              <img src="https://i.pravatar.cc/150?img=11" alt="Profile" className="w-10 h-10 rounded-full border-2 border-white/80" />
+            </div>
+          </div>
+
+          {/* Greeting Area */}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: "easeOut" }} className="relative z-10 mb-10">
+            <h1 className={`text-5xl font-black mb-3 font-heading tracking-tight leading-[1.1] ${getTimeOfDayGreeting() === 'Evening' ? 'text-white' : 'text-slate-900'}`}>
+              Good<br/>{getTimeOfDayGreeting()}!
+            </h1>
+            <p className={`text-lg font-medium tracking-wide ${getTimeOfDayGreeting() === 'Evening' ? 'text-slate-300' : 'text-slate-500'}`}>
+              Where are we heading today?
+            </p>
+          </motion.div>
+
+          {/* Search Bar */}
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 0.5 }} className="relative z-10 w-full mb-10">
+            <button 
+              onClick={() => setIsBookingMode(true)}
+              className={`w-full text-left px-5 py-4 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex items-center gap-4 transition-transform active:scale-95 backdrop-blur-xl ${getTimeOfDayGreeting() === 'Evening' ? 'bg-white/10 border border-white/10' : 'bg-white/80 border border-white'}`}
+            >
+              <div className={`w-12 h-12 rounded-full flex items-center justify-center shadow-inner ${getTimeOfDayGreeting() === 'Evening' ? 'bg-cyan-500 text-white' : 'bg-[#000000] text-white'}`}>
+                <Search className="w-6 h-6" />
+              </div>
+              <span className={`text-2xl font-black ${getTimeOfDayGreeting() === 'Evening' ? 'text-white' : 'text-slate-900'}`}>Where to?</span>
+            </button>
+          </motion.div>
+
+          {/* Quick Destinations */}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.5 }} className="relative z-10 flex-1">
+            <h3 className={`text-[11px] font-black tracking-widest uppercase mb-4 px-1 ${getTimeOfDayGreeting() === 'Evening' ? 'text-slate-400' : 'text-slate-400'}`}>Recent Places</h3>
+            <div className="grid grid-cols-2 gap-4">
+              {['Male Hostel', 'Library', 'Main Gate', 'Clinic'].map((place, i) => (
+                <button
+                  key={place}
+                  onClick={() => {
+                    setDropoff(place);
+                    setIsBookingMode(true);
+                  }}
+                  className={`p-5 rounded-3xl flex flex-col items-start gap-4 shadow-sm active:scale-95 transition-all ${
+                    getTimeOfDayGreeting() === 'Evening' 
+                      ? 'bg-white/5 border border-white/5 hover:bg-white/10' 
+                      : 'bg-white/60 border border-white hover:bg-white backdrop-blur-md'
+                  }`}
+                >
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center ${getTimeOfDayGreeting() === 'Evening' ? 'bg-cyan-500/20 text-cyan-400' : 'bg-slate-100 text-slate-900'}`}>
+                    <MapPin className="w-6 h-6" />
+                  </div>
+                  <span className={`text-left font-black text-sm w-full truncate ${getTimeOfDayGreeting() === 'Evening' ? 'text-white' : 'text-slate-900'}`}>{place}</span>
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      );
+    }
+
+    return (
     <div className="w-full h-full relative bg-slate-100 flex flex-col pb-24 overflow-hidden">
       {/* Real-time Map Background */}
       <div className="absolute inset-0 z-0">
@@ -271,69 +341,28 @@ export default function PassengerDashboard() {
       </div>
 
       {/* Bottom Sheet UI */}
-      <motion.div 
-        initial={{ y: "100%" }}
-        animate={{ y: 0 }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className="absolute bottom-[72px] w-full z-20 bg-white rounded-t-[2.5rem] shadow-[0_-20px_40px_rgba(0,0,0,0.15)] flex flex-col pt-3 pb-6 px-6 max-h-[85vh] overflow-y-auto"
-      >
+        <motion.div 
+          initial={{ y: "100%" }}
+          animate={{ y: 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          className="absolute bottom-[72px] w-full z-20 bg-white rounded-t-[2.5rem] shadow-[0_-20px_40px_rgba(0,0,0,0.15)] flex flex-col pt-3 pb-6 px-6 max-h-[85vh] overflow-y-auto scroll-smooth overscroll-contain"
+        >
         {/* Handle */}
         <div className="w-12 h-1.5 bg-slate-200 rounded-full mx-auto mb-6"></div>
         
-        {!isBookingMode ? (
-          <div className="flex flex-col mb-4">
-            <h1 className="text-3xl font-black text-slate-900 mb-1 font-heading tracking-tight">
-              Good {getTimeOfDayGreeting()},{"\n"}{passengerName.split(' ')[0] || 'Alex'}! 👋
-            </h1>
-            <p className="text-base font-bold text-slate-500 mb-6">Where would you like to go today?</p>
-            
-            <button 
-              onClick={() => setIsBookingMode(true)}
-              className="w-full bg-slate-100 hover:bg-slate-200 text-left px-5 py-4 rounded-3xl transition-colors flex items-center gap-3 shadow-sm"
-            >
-              <Search className="w-6 h-6 text-slate-900" />
-              <span className="text-xl font-black text-slate-900">Where to?</span>
-            </button>
-
-            {/* Saved Places Quick Actions */}
-            <div className="mt-8">
-              <h3 className="text-sm font-bold text-slate-900 mb-4 px-1">Saved Places</h3>
-              <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-                {['Male Hostel', 'Library', 'Main Gate', 'Clinic'].map((place) => (
-                  <button
-                    key={place}
-                    onClick={() => {
-                      setDropoff(place);
-                      setIsBookingMode(true);
-                    }}
-                    className="flex-shrink-0 bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] p-4 rounded-3xl w-28 flex flex-col items-center gap-3 active:scale-95 transition-transform hover:border-slate-300"
-                  >
-                    <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center text-slate-900">
-                      <MapPin className="w-6 h-6" />
-                    </div>
-                    <span className="text-[11px] font-bold text-slate-900 text-center w-full truncate">{place}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-            
-            <div className="h-12 w-full flex-shrink-0" />
-          </div>
-        ) : (
-          <>
-            <div className="flex items-center mb-6">
-              <button 
-                onClick={() => setIsBookingMode(false)}
-                className="p-2 -ml-2 rounded-full hover:bg-slate-100 transition-colors"
-              >
-                <ArrowLeft className="w-6 h-6 text-slate-900" />
-              </button>
-              <h2 className="text-2xl font-black text-slate-900 ml-2 font-heading tracking-tight">Plan your ride</h2>
-            </div>
-            
-            <div className="mb-4 space-y-3">
-              <div>
-                <label className="block text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">Your Name</label>
+        <div className="flex items-center mb-6">
+          <button 
+            onClick={() => setIsBookingMode(false)}
+            className="p-2 -ml-2 rounded-full hover:bg-slate-100 transition-colors"
+          >
+            <ArrowLeft className="w-6 h-6 text-slate-900" />
+          </button>
+          <h2 className="text-2xl font-black text-slate-900 ml-2 font-heading tracking-tight">Plan your ride</h2>
+        </div>
+        
+        <div className="mb-4 space-y-3">
+          <div>
+            <label className="block text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">Your Name</label>
             <input 
               type="text" 
               value={passengerName}
@@ -587,14 +616,13 @@ export default function PassengerDashboard() {
             </motion.button>
           )}
         </AnimatePresence>
-        </>
-        )}
         
         {/* Extra padding to ensure the button isn't obstructed by bottom nav or screen edges */}
         <div className="h-12 w-full flex-shrink-0" />
       </motion.div>
     </div>
-  );
+    );
+  };
 
   // -------------------------------------------------------------
   // BOTTOM NAVIGATION (Sleek Premium Floating)
