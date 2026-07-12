@@ -14,6 +14,7 @@ import { auth } from '../../lib/firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { usePaystackPayment } from 'react-paystack';
 import dynamic from 'next/dynamic';
+import Sidebar from '../../components/Sidebar';
 
 const LiveMap = dynamic(() => import('../../components/LiveMap'), { ssr: false });
 
@@ -48,6 +49,8 @@ export default function PassengerDashboard() {
   const [walletBalance, setWalletBalance] = useState(2450);
   const [showTopUp, setShowTopUp] = useState(false);
   const [topUpAmount, setTopUpAmount] = useState('');
+  
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // History & Schedule State
   const [historyRides, setHistoryRides] = useState<RideRequest[]>([]);
@@ -238,48 +241,102 @@ export default function PassengerDashboard() {
   // -------------------------------------------------------------
   const renderRide = () => {
     if (!isBookingMode) {
+      const isEvening = getTimeOfDayGreeting() === 'Evening';
+      
       return (
-        <div className={`w-full h-full relative flex flex-col px-6 pt-16 pb-24 overflow-hidden transition-colors duration-1000 ${
-          getTimeOfDayGreeting() === 'Morning' ? 'bg-gradient-to-br from-orange-50 via-rose-50 to-white' : 
-          getTimeOfDayGreeting() === 'Afternoon' ? 'bg-gradient-to-br from-blue-50 via-cyan-50 to-white' : 
-          'bg-gradient-to-br from-[#0A192F] via-slate-800 to-slate-900'
+        <div className={`w-full h-full relative flex flex-col px-6 pt-16 pb-32 overflow-y-auto overflow-x-hidden transition-colors duration-1000 ${
+          isEvening ? 'bg-[#050505]' : 'bg-slate-50'
         }`}>
+          {/* Animated Premium Backgrounds */}
+          {isEvening ? (
+            <>
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-cyan-900/40 via-[#050505] to-[#050505] opacity-60" />
+              <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none" />
+            </>
+          ) : (
+            <>
+              <div className={`absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] ${
+                getTimeOfDayGreeting() === 'Morning' 
+                  ? 'from-orange-200/40 via-orange-50/20 to-transparent'
+                  : 'from-blue-200/40 via-cyan-50/20 to-transparent'
+              } opacity-80 pointer-events-none`} />
+              <div className="absolute top-0 right-0 w-96 h-96 bg-white/40 rounded-full blur-[80px] pointer-events-none" />
+            </>
+          )}
+
           {/* Header Area */}
-          <div className="relative z-10 flex justify-between items-center mb-10">
-            <button className={`p-3 rounded-full backdrop-blur-md shadow-sm border ${getTimeOfDayGreeting() === 'Evening' ? 'bg-white/10 border-white/10 text-white' : 'bg-white/50 border-white/50 text-slate-900'}`}>
+          <div className="relative z-10 flex justify-between items-center mb-12">
+            <button 
+              onClick={() => setIsSidebarOpen(true)}
+              className={`p-3.5 rounded-full backdrop-blur-xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all active:scale-95 border ${
+                isEvening 
+                  ? 'bg-white/[0.03] border-white/10 text-white hover:bg-white/10' 
+                  : 'bg-white/70 border-white text-slate-900 hover:bg-white'
+              }`}
+            >
               <Menu className="w-6 h-6" />
             </button>
-            <div className={`p-1 rounded-full backdrop-blur-md shadow-sm border ${getTimeOfDayGreeting() === 'Evening' ? 'bg-white/10 border-white/10' : 'bg-white/50 border-white/50'}`}>
-              <img src="https://i.pravatar.cc/150?img=11" alt="Profile" className="w-10 h-10 rounded-full border-2 border-white/80" />
+            <div className="relative group">
+              <div className={`absolute inset-0 rounded-full blur-md opacity-50 transition-all group-hover:opacity-100 ${
+                isEvening ? 'bg-cyan-500/50' : 'bg-[#000000]/20'
+              }`} />
+              <div className={`relative p-1 rounded-full backdrop-blur-xl shadow-lg border ${
+                isEvening ? 'bg-white/[0.05] border-white/20' : 'bg-white/90 border-white'
+              }`}>
+                <img src="https://i.pravatar.cc/150?img=11" alt="Profile" className="w-11 h-11 rounded-full border-2 border-white/80 object-cover" />
+              </div>
             </div>
           </div>
 
           {/* Greeting Area */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: "easeOut" }} className="relative z-10 mb-10">
-            <h1 className={`text-5xl font-black mb-3 font-heading tracking-tight leading-[1.1] ${getTimeOfDayGreeting() === 'Evening' ? 'text-white' : 'text-slate-900'}`}>
-              Good<br/>{getTimeOfDayGreeting()}!
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: "easeOut" }} className="relative z-10 mb-12">
+            <h1 className={`text-5xl md:text-6xl font-black mb-3 font-heading tracking-tight leading-[1.1] ${
+              isEvening ? 'text-white drop-shadow-md' : 'text-slate-900 drop-shadow-sm'
+            }`}>
+              Good<br/>
+              <span className={isEvening ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400' : 'text-transparent bg-clip-text bg-gradient-to-r from-[#000000] to-slate-600'}>
+                {getTimeOfDayGreeting()}!
+              </span>
             </h1>
-            <p className={`text-lg font-medium tracking-wide ${getTimeOfDayGreeting() === 'Evening' ? 'text-slate-300' : 'text-slate-500'}`}>
+            <p className={`text-lg font-medium tracking-wide ${isEvening ? 'text-slate-300' : 'text-slate-500'}`}>
               Where are we heading today?
             </p>
           </motion.div>
 
-          {/* Search Bar */}
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 0.5 }} className="relative z-10 w-full mb-10">
+          {/* Search Bar - Premium Floating Glass Pill */}
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 0.5 }} className="relative z-10 w-full mb-12 group">
+            {isEvening && (
+              <div className="absolute inset-0 bg-cyan-500/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+            )}
             <button 
               onClick={() => setIsBookingMode(true)}
-              className={`w-full text-left px-5 py-4 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex items-center gap-4 transition-transform active:scale-95 backdrop-blur-xl ${getTimeOfDayGreeting() === 'Evening' ? 'bg-white/10 border border-white/10' : 'bg-white/80 border border-white'}`}
+              className={`w-full text-left px-5 py-4 rounded-[2.5rem] shadow-[0_8px_32px_rgba(0,0,0,0.1)] flex items-center gap-4 transition-all duration-300 active:scale-[0.98] backdrop-blur-2xl border ${
+                isEvening 
+                  ? 'bg-white/[0.05] border-white/10 hover:border-white/20' 
+                  : 'bg-white/80 border-white hover:bg-white hover:shadow-[0_8px_40px_rgba(0,0,0,0.08)]'
+              }`}
             >
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center shadow-inner ${getTimeOfDayGreeting() === 'Evening' ? 'bg-cyan-500 text-white' : 'bg-[#000000] text-white'}`}>
-                <Search className="w-6 h-6" />
+              <div className={`w-14 h-14 rounded-full flex items-center justify-center shadow-inner relative overflow-hidden ${
+                isEvening ? 'bg-cyan-500 text-white shadow-[0_0_20px_rgba(6,182,212,0.4)]' : 'bg-[#000000] text-white'
+              }`}>
+                {isEvening && (
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                )}
+                <Search className="w-6 h-6 relative z-10" />
               </div>
-              <span className={`text-2xl font-black ${getTimeOfDayGreeting() === 'Evening' ? 'text-white' : 'text-slate-900'}`}>Where to?</span>
+              <span className={`text-2xl font-black ${isEvening ? 'text-white/90' : 'text-slate-800'}`}>Where to?</span>
             </button>
           </motion.div>
 
           {/* Quick Destinations */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.5 }} className="relative z-10 flex-1">
-            <h3 className={`text-[11px] font-black tracking-widest uppercase mb-4 px-1 ${getTimeOfDayGreeting() === 'Evening' ? 'text-slate-400' : 'text-slate-400'}`}>Recent Places</h3>
+            <h3 className={`text-[11px] font-black tracking-widest uppercase mb-5 px-2 flex items-center gap-2 ${
+              isEvening ? 'text-slate-400' : 'text-slate-400'
+            }`}>
+              <div className={`w-1.5 h-1.5 rounded-full ${isEvening ? 'bg-cyan-500' : 'bg-slate-400'}`} />
+              Recent Places
+            </h3>
             <div className="grid grid-cols-2 gap-4">
               {['Male Hostel', 'Library', 'Main Gate', 'Clinic'].map((place, i) => (
                 <button
@@ -288,16 +345,18 @@ export default function PassengerDashboard() {
                     setDropoff(place);
                     setIsBookingMode(true);
                   }}
-                  className={`p-5 rounded-3xl flex flex-col items-start gap-4 shadow-sm active:scale-95 transition-all ${
-                    getTimeOfDayGreeting() === 'Evening' 
-                      ? 'bg-white/5 border border-white/5 hover:bg-white/10' 
-                      : 'bg-white/60 border border-white hover:bg-white backdrop-blur-md'
+                  className={`p-5 rounded-3xl flex flex-col items-start gap-4 active:scale-[0.98] transition-all duration-300 group ${
+                    isEvening 
+                      ? 'bg-white/[0.03] border border-white/5 hover:bg-white/[0.08] hover:border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.2)]' 
+                      : 'bg-white/60 border border-white hover:bg-white backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]'
                   }`}
                 >
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center ${getTimeOfDayGreeting() === 'Evening' ? 'bg-cyan-500/20 text-cyan-400' : 'bg-slate-100 text-slate-900'}`}>
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${
+                    isEvening ? 'bg-cyan-500/10 text-cyan-400 shadow-[inset_0_0_12px_rgba(6,182,212,0.1)]' : 'bg-slate-100 text-slate-900'
+                  }`}>
                     <MapPin className="w-6 h-6" />
                   </div>
-                  <span className={`text-left font-black text-sm w-full truncate ${getTimeOfDayGreeting() === 'Evening' ? 'text-white' : 'text-slate-900'}`}>{place}</span>
+                  <span className={`text-left font-black text-[15px] w-full truncate ${isEvening ? 'text-slate-200 group-hover:text-white' : 'text-slate-800'}`}>{place}</span>
                 </button>
               ))}
             </div>
@@ -316,7 +375,10 @@ export default function PassengerDashboard() {
       {/* Header */}
       <div className="absolute top-0 w-full z-10 bg-white px-4 py-4 flex items-center justify-between border-b border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
         <div className="flex items-center gap-3">
-          <button className="p-2 rounded-full hover:bg-slate-100 transition-colors">
+          <button 
+            onClick={() => setIsSidebarOpen(true)}
+            className="p-2 rounded-full hover:bg-slate-100 transition-colors"
+          >
             <Menu className="w-6 h-6 text-slate-900" />
           </button>
           <div className="flex items-center gap-2">
@@ -637,36 +699,57 @@ export default function PassengerDashboard() {
 
     return (
       <div className="absolute bottom-6 left-4 right-4 z-50 pointer-events-none">
-        <div className="pointer-events-auto bg-white border border-slate-100 shadow-lg rounded-3xl p-1.5 flex justify-between items-center max-w-sm mx-auto relative overflow-hidden">
+        <div className={`pointer-events-auto backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.15)] rounded-3xl p-2 flex justify-between items-center max-w-sm mx-auto relative overflow-hidden transition-colors duration-1000 ${
+          getTimeOfDayGreeting() === 'Evening' 
+            ? 'bg-white/[0.03] border border-white/10' 
+            : 'bg-white/80 border border-white/50 shadow-[0_8px_32px_rgba(0,0,0,0.05)]'
+        }`}>
+          {getTimeOfDayGreeting() === 'Evening' && (
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 opacity-50" />
+          )}
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = currentView === tab.id;
+            const isEvening = getTimeOfDayGreeting() === 'Evening';
+            
             return (
               <button 
                 key={tab.id}
                 onClick={() => setCurrentView(tab.id as ViewState)}
-                className={`relative z-10 flex flex-col items-center gap-1 py-2 px-1 w-full transition-colors duration-300 ${
-                  isActive ? 'text-slate-900' : 'text-slate-400 hover:text-slate-600'
+                className={`relative z-10 flex flex-col items-center gap-1.5 py-2 px-1 w-full transition-all duration-300 ${
+                  isActive 
+                    ? (isEvening ? 'text-white' : 'text-gray-900') 
+                    : (isEvening ? 'text-slate-400 hover:text-slate-200' : 'text-slate-500 hover:text-slate-700')
                 }`}
               >
                 {isActive && (
                   <motion.div 
-                    layoutId="passenger-nav-pill"
-                    className="absolute inset-0 bg-slate-100 rounded-3xl -z-10"
+                    layoutId="passenger-nav-pill-premium"
+                    className={`absolute inset-0 rounded-2xl -z-10 ${
+                      isEvening 
+                        ? 'bg-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] border border-white/5' 
+                        : 'bg-white shadow-sm border border-slate-100'
+                    }`}
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
-                <div className="w-6 h-6 flex items-center justify-center relative">
-                  <Icon className={`w-5 h-5 transition-all duration-300 ${isActive ? 'scale-110 text-[#000000]' : ''}`} strokeWidth={isActive ? 2.5 : 2} />
+                <div className="w-7 h-7 flex items-center justify-center relative">
+                  <Icon className={`transition-all duration-500 ${
+                    isActive 
+                      ? `scale-110 w-6 h-6 ${isEvening ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]' : 'text-[#000000]'}` 
+                      : 'w-5 h-5'
+                  }`} strokeWidth={isActive ? 2.5 : 2} />
                   {isActive && (
                     <motion.div 
-                      layoutId="passenger-nav-dot"
-                      className="absolute -bottom-3 w-1 h-1 bg-[#000000] rounded-full"
+                      layoutId="passenger-nav-dot-premium"
+                      className={`absolute -bottom-4 w-1.5 h-1.5 rounded-full ${
+                        isEvening ? 'bg-cyan-400 shadow-[0_0_10px_rgba(6,182,212,1)]' : 'bg-[#000000]'
+                      }`}
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
                 </div>
-                <span className={`text-[10px] transition-all duration-300 mt-1 ${isActive ? 'font-black opacity-100' : 'font-semibold opacity-70'}`}>
+                <span className={`text-[10px] tracking-wide transition-all duration-300 mt-1 ${isActive ? 'font-black opacity-100' : 'font-medium opacity-70'}`}>
                   {tab.label}
                 </span>
               </button>
@@ -905,7 +988,13 @@ export default function PassengerDashboard() {
   }
 
   return (
-    <div className="w-full h-screen bg-[#f8fafc] flex justify-center overflow-hidden font-sans">
+    <div className="w-full h-screen bg-white relative overflow-hidden font-sans max-w-md mx-auto shadow-2xl">
+      <Sidebar 
+        isOpen={isSidebarOpen} 
+        onClose={() => setIsSidebarOpen(false)} 
+        userRole="PASSENGER" 
+        userName={passengerName || 'Alex'} 
+      />
       <div className="w-full max-w-md bg-white h-full relative overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.03)] sm:border-x sm:border-slate-100">
         <AnimatePresence mode="wait">
           <motion.div

@@ -13,6 +13,7 @@ import { auth } from '@/lib/firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
+import Sidebar from '../../components/Sidebar';
 
 const LiveMap = dynamic(() => import('../../components/LiveMap'), { ssr: false });
 
@@ -27,6 +28,8 @@ export default function DriverDashboard() {
     if (hour < 17) return 'Afternoon';
     return 'Evening';
   };
+  
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
   const [currentView, setCurrentView] = useState<ViewState>('HOME');
   const [isOnline, setIsOnline] = useState(false);
@@ -254,72 +257,84 @@ export default function DriverDashboard() {
   const renderHome = () => {
     if (!isOnline) {
       return (
-        <div className={`w-full h-screen relative flex flex-col px-6 pt-16 pb-24 overflow-hidden transition-colors duration-1000 ${
-          getTimeOfDayGreeting() === 'Morning' ? 'bg-gradient-to-br from-amber-100 via-orange-50 to-white' : 
-          getTimeOfDayGreeting() === 'Afternoon' ? 'bg-gradient-to-br from-indigo-50 via-blue-50 to-white' : 
-          'bg-gradient-to-br from-[#0A192F] via-slate-800 to-slate-900'
-        }`}>
+        <div className="w-full h-screen relative flex flex-col px-6 pt-14 pb-24 overflow-hidden bg-[#050505]">
+          {/* Ambient Background Glows */}
+          <div className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] rounded-full bg-cyan-900/20 blur-[120px] pointer-events-none" />
+          <div className="absolute bottom-[-10%] right-[-20%] w-[60%] h-[60%] rounded-full bg-blue-900/20 blur-[120px] pointer-events-none" />
+
           {/* Header Area */}
-          <div className="relative z-10 flex justify-between items-center mb-16">
-            <button className={`p-3 rounded-full backdrop-blur-md shadow-sm border ${getTimeOfDayGreeting() === 'Evening' ? 'bg-white/10 border-white/10 text-white' : 'bg-white/50 border-white/50 text-slate-900'}`}>
+          <div className="relative z-10 flex justify-between items-center mb-10">
+            <button 
+              onClick={() => setIsSidebarOpen(true)}
+              className="p-3 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white shadow-2xl hover:bg-white/10 transition-all"
+            >
               <Menu className="w-6 h-6" />
             </button>
-            <div className={`px-4 py-2 rounded-full backdrop-blur-md shadow-sm border font-bold text-xs tracking-widest uppercase ${getTimeOfDayGreeting() === 'Evening' ? 'bg-white/10 border-white/10 text-white' : 'bg-white/50 border-white/50 text-slate-900'}`}>
+            <div className="px-5 py-2.5 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 font-black text-[10px] tracking-[0.25em] text-slate-300 shadow-2xl flex items-center">
+              <span className="inline-block w-2 h-2 rounded-full bg-slate-500 mr-2 animate-pulse"></span>
               OFFLINE
             </div>
           </div>
 
           {/* Center Avatar & Greeting */}
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, ease: "easeOut" }} className="relative z-10 flex flex-col items-center justify-center flex-1 mb-8">
-            <div className="relative mb-6">
-               <div className="absolute inset-0 bg-orange-400 blur-2xl opacity-20 rounded-full animate-pulse-ring" />
-               <img src="https://i.pravatar.cc/150?img=33" alt="Driver" className={`w-32 h-32 rounded-full border-4 shadow-2xl relative z-10 ${getTimeOfDayGreeting() === 'Evening' ? 'border-slate-800' : 'border-white'}`} />
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} className="relative z-10 flex flex-col items-center justify-center flex-1 mb-6 mt-2">
+            <div className="relative mb-8 group">
+               <div className="absolute inset-0 bg-cyan-500 blur-3xl opacity-20 rounded-full animate-pulse group-hover:opacity-40 transition-opacity duration-700" />
+               <div className="absolute inset-[-4px] bg-gradient-to-tr from-cyan-500 to-blue-600 rounded-full animate-spin-slow opacity-60" style={{ animationDuration: '4s' }} />
+               <img src="https://i.pravatar.cc/150?img=33" alt="Driver" className="w-36 h-36 rounded-full border-[6px] border-[#050505] relative z-10 object-cover" />
             </div>
             
-            <h1 className={`text-4xl font-black mb-2 font-heading tracking-tight text-center ${getTimeOfDayGreeting() === 'Evening' ? 'text-white' : 'text-slate-900'}`}>
-              Ready to earn,<br/>Partner?
+            <h1 className="text-4xl md:text-5xl font-black mb-3 font-heading tracking-tight text-center text-white leading-tight">
+              Ready to earn,<br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Partner?</span>
             </h1>
-            <p className={`text-lg font-medium text-center ${getTimeOfDayGreeting() === 'Evening' ? 'text-slate-300' : 'text-slate-500'}`}>
-              Your city needs you.
+            <p className="text-lg font-medium text-center text-slate-400 tracking-wide">
+              The city is waiting for you.
             </p>
           </motion.div>
 
           {/* The Orb (Go Online Button) */}
-          <div className="relative z-10 flex flex-col items-center mb-10">
+          <div className="relative z-10 flex flex-col items-center mb-12">
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleGoOnline}
-              className={`relative w-32 h-32 rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.3)] border-[6px] border-white/10 transition-all duration-500 group overflow-hidden ${
-                isSuspended ? 'bg-slate-800 text-slate-500 cursor-not-allowed' : 'bg-gradient-to-tr from-[#000000] to-slate-800 text-white'
-              }`}
+              className={`relative w-40 h-40 rounded-full flex items-center justify-center group ${isSuspended ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
-              <div className="absolute inset-0 bg-white/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="absolute inset-0 rounded-full animate-pulse bg-white/10 pointer-events-none" />
-              <span className="text-3xl font-black tracking-widest font-heading relative z-10">GO</span>
+              {/* Outer pulsing ring */}
+              <div className="absolute inset-0 rounded-full bg-cyan-500/20 blur-2xl group-hover:bg-cyan-500/40 transition-all duration-500" />
+              <div className="absolute inset-2 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-600 blur-md opacity-60 group-hover:opacity-100 transition-opacity duration-500 animate-pulse" />
+              
+              {/* Button Body */}
+              <div className="relative w-full h-full rounded-full bg-[#0a0a0a] border border-white/10 shadow-[inset_0_0_30px_rgba(6,182,212,0.3)] flex items-center justify-center overflow-hidden z-10">
+                <div className="absolute top-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent opacity-50" />
+                <span className="text-5xl font-black tracking-[0.1em] text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-300 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] translate-x-1">GO</span>
+              </div>
             </motion.button>
             {isSuspended && (
-               <p className="mt-4 text-red-500 font-bold text-sm bg-red-50 px-4 py-2 rounded-full">Account Suspended</p>
+               <p className="mt-6 text-red-400 font-bold text-sm bg-red-950/50 border border-red-500/20 px-6 py-2.5 rounded-full backdrop-blur-md">Account Suspended</p>
             )}
           </div>
 
           {/* Destination Mode */}
           <div className="relative z-10 w-full mt-auto">
-             <div className="relative">
-               <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none">
-                 <Route className={`w-6 h-6 ${getTimeOfDayGreeting() === 'Evening' ? 'text-cyan-400' : 'text-slate-400'}`} />
+             <div className="relative group cursor-text">
+               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+               <div className="relative bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-3xl p-1.5 flex items-center shadow-2xl">
+                 <div className="w-14 h-14 flex items-center justify-center bg-white/5 rounded-2xl mr-2">
+                   <Route className="w-6 h-6 text-cyan-400" />
+                 </div>
+                 <input 
+                   type="text" 
+                   placeholder="Heading home? Set a destination" 
+                   value={destinationMode}
+                   onChange={(e) => setDestinationMode(e.target.value)}
+                   className="bg-transparent border-none focus:ring-0 text-white placeholder-slate-500 font-medium text-lg w-full px-2"
+                 />
+                 <button className="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center mr-1 shadow-lg hover:shadow-cyan-500/25 transition-all">
+                   <ChevronRight className="w-6 h-6 text-white" />
+                 </button>
                </div>
-               <input
-                 type="text"
-                 value={destinationMode}
-                 onChange={(e) => setDestinationMode(e.target.value)}
-                 placeholder="Heading home? Set a destination"
-                 className={`w-full rounded-[2rem] pl-14 pr-6 py-5 font-bold text-lg focus:outline-none transition-shadow shadow-sm backdrop-blur-xl ${
-                   getTimeOfDayGreeting() === 'Evening' 
-                     ? 'bg-white/10 border border-white/10 text-white placeholder-slate-400 focus:border-cyan-500 focus:shadow-[0_0_20px_rgba(6,182,212,0.2)]' 
-                     : 'bg-white/80 border border-white text-slate-900 placeholder-slate-400 focus:border-[#000000] focus:shadow-lg'
-                 }`}
-               />
              </div>
           </div>
         </div>
@@ -337,7 +352,10 @@ export default function DriverDashboard() {
         {/* Header - Glassmorphism */}
         <div className="absolute top-0 w-full z-10 bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] px-4 py-4 flex items-center justify-between border-b border-slate-100">
           <div className="flex items-center gap-3">
-            <button className="p-2 rounded-full hover:bg-slate-100 transition-colors">
+            <button 
+              onClick={() => setIsSidebarOpen(true)}
+              className="p-2 rounded-full hover:bg-slate-100 transition-colors"
+            >
               <Menu className="w-6 h-6 text-gray-900" />
             </button>
             <div className="flex flex-col">
@@ -742,7 +760,9 @@ export default function DriverDashboard() {
       {/* Header Profile */}
       <div className="bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] px-6 py-5 flex items-center justify-between sticky top-0 z-20 border-b border-slate-100">
         <div className="flex items-center gap-3">
-          <Menu className="w-6 h-6 text-gray-900" />
+          <button onClick={() => setIsSidebarOpen(true)} className="p-2 -ml-2 rounded-full hover:bg-slate-100 transition-colors">
+            <Menu className="w-6 h-6 text-gray-900" />
+          </button>
           <h1 className="text-xl font-bold text-gray-900 tracking-tight font-heading">Earnings</h1>
         </div>
         <div className="p-0.5 rounded-full bg-gradient-to-br from-cyan-500 to-amber-500">
@@ -991,10 +1011,10 @@ export default function DriverDashboard() {
 
     return (
       <div className="absolute bottom-6 left-4 right-4 z-50 pointer-events-none">
-        <div className="pointer-events-auto bg-[#112240]/80 backdrop-blur-2xl border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] rounded-3xl p-1.5 flex justify-between items-center max-w-sm mx-auto relative overflow-hidden">
+        <div className="pointer-events-auto bg-white/[0.03] backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] rounded-3xl p-2 flex justify-between items-center max-w-sm mx-auto relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 opacity-50" />
           {tabs.map((tab) => {
             const Icon = tab.icon;
-            // Simplified active state logic for the demo tabs
             const isActive = currentView === tab.id || (tab.id === 'HOME' && currentView === 'HOME');
             
             return (
@@ -1007,31 +1027,31 @@ export default function DriverDashboard() {
                     setCurrentView(tab.id as ViewState);
                   }
                 }}
-                className={`relative z-10 flex flex-col items-center gap-1 py-2 px-1 w-full transition-colors duration-300 ${
-                  isActive ? 'text-gray-900' : 'text-slate-500 hover:text-slate-300'
+                className={`relative z-10 flex flex-col items-center gap-1.5 py-2 px-1 w-full transition-all duration-300 ${
+                  isActive ? 'text-white' : 'text-slate-500 hover:text-slate-300'
                 }`}
               >
                 {isActive && (
                   <motion.div 
-                    layoutId="driver-nav-pill"
-                    className="absolute inset-0 bg-white/10 shadow-inner rounded-3xl -z-10 border border-slate-100"
+                    layoutId="driver-nav-pill-premium"
+                    className="absolute inset-0 bg-white/10 rounded-2xl -z-10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] border border-white/5"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
-                <div className="w-6 h-6 flex items-center justify-center relative">
-                  <Icon className={`w-5 h-5 transition-all duration-300 ${isActive ? 'scale-110 text-cyan-500' : ''}`} strokeWidth={isActive ? 2.5 : 2} />
+                <div className="w-7 h-7 flex items-center justify-center relative">
+                  <Icon className={`transition-all duration-500 ${isActive ? 'scale-110 text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.8)] w-6 h-6' : 'w-5 h-5'}`} strokeWidth={isActive ? 2.5 : 2} />
                   {tab.dot && (
-                    <div className={`absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-[#112240] transition-transform ${isActive ? 'scale-110' : ''}`}></div>
+                    <div className={`absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-[#050505] transition-transform ${isActive ? 'scale-110 shadow-[0_0_8px_rgba(239,68,68,0.8)]' : ''}`}></div>
                   )}
                   {isActive && (
                     <motion.div 
-                      layoutId="driver-nav-dot"
-                      className="absolute -bottom-3 w-1 h-1 bg-cyan-500 rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.03)]"
+                      layoutId="driver-nav-dot-premium"
+                      className="absolute -bottom-4 w-1.5 h-1.5 bg-cyan-400 rounded-full shadow-[0_0_10px_rgba(6,182,212,1)]"
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
                 </div>
-                <span className={`text-[10px] transition-all duration-300 mt-1 ${isActive ? 'font-black opacity-100' : 'font-semibold opacity-70'}`}>
+                <span className={`text-[10px] tracking-wide transition-all duration-300 mt-1 ${isActive ? 'font-black opacity-100' : 'font-medium opacity-70'}`}>
                   {tab.label}
                 </span>
               </button>
@@ -1047,8 +1067,15 @@ export default function DriverDashboard() {
   }
 
   return (
-    <div className="w-full h-screen bg-slate-50 flex justify-center overflow-hidden font-sans">
-      <div className="w-full max-w-md bg-slate-50 h-full relative overflow-hidden shadow-2xl sm:border-x sm:border-slate-100">
+    <div className="w-full h-screen bg-white relative overflow-hidden font-sans max-w-md mx-auto shadow-2xl">
+      <Sidebar 
+        isOpen={isSidebarOpen} 
+        onClose={() => setIsSidebarOpen(false)} 
+        userRole="DRIVER" 
+        userName="Driver Partner" 
+      />
+      
+      <div className="w-full h-full relative overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentView}
